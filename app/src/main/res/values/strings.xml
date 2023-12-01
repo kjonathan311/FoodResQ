@@ -11,6 +11,12 @@
     <string name="profile_number">0835239867</string>
     <string name="history">History</string>
     <string name="orders">Orders</string>
-
+    <string name="welcome">Welcome back.</string>
+    <string name="error_email">Please input only email!</string>
+    <string name="error_password">Password must have minimal 8 characters!</string>
+    <string name="textEmail">Email</string>
+    <string name="textPassword">Password</string>
+    <string name="logIn">Login</string>
+    <string name="navigateToregister">New user? Please register</string>
 
 </resources>
