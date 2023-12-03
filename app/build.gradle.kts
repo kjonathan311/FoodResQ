@@ -56,5 +56,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation ("androidx.cardview:cardview:1.0.0")
+    
+    implementation("com.google.android.material:material:1.6.0")
 
 }
