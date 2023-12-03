@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">FoodResQ</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Profile -->
@@ -18,6 +17,8 @@
     <string name="textPassword">Password</string>
     <string name="logIn">Login</string>
     <string name="navigateToregister">New user? Please register</string>
+
+    <!-- Order/History-->
     <string name="order_title">Burger Joint 1</string>
     <string name="order_address">Smith Street 12</string>
     <string name="order_pickup_time">Pick-up time:12:00-18:00</string>
@@ -25,4 +26,13 @@
     <string name="success">Succeed</string>
     <string name="cancelled">Canceled by Customer</string>
 
+    <!-- Settings -->
+    <string name="subscription">Subscription</string>
+    <string name="subscription_icon">ic_subscription</string>
+    <string name="settings">Settings</string>
+    <string name="settings_icon">ic_settings</string>
+    <string name="partner">Become a partner</string>
+    <string name="partner_icon">ic_handshake</string>
+    <string name="rate">Rate our app</string>
+    <string name="rate_icon">ic_rate</string>
 </resources>
