@@ -1,15 +1,17 @@
 package com.capstone.foodresq.ui.main.explore
 
+import android.R.attr.spacing
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.capstone.foodresq.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodresq.data.FoodItem
-import com.capstone.foodresq.data.History
+import com.capstone.foodresq.data.Selection
 import com.capstone.foodresq.databinding.FragmentExploreBinding
+import com.capstone.foodresq.utils.GridSpacingItemDecoration
 
 
 class ExploreFragment : Fragment() {
@@ -28,17 +30,7 @@ class ExploreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val exampleFoodItemList = listOf(
-            FoodItem(1),
-            FoodItem(2),
-            FoodItem(3),
-            FoodItem(4),
-        )
-        val FoodItemAdapter=FoodItemAdapter(exampleFoodItemList)
-        binding.rvFoodRecommendation.layoutManager=GridLayoutManager(requireActivity(),2)
-        binding.rvFoodRecommendation.adapter=FoodItemAdapter
-
+        setData()
 
         search=""
         with(binding){
@@ -52,5 +44,37 @@ class ExploreFragment : Fragment() {
                     false
                 }
         }
+    }
+
+    private fun setData(){
+        val exampleFoodItemList = listOf(
+            FoodItem(1),
+            FoodItem(2),
+            FoodItem(3),
+            FoodItem(4),
+        )
+
+        val exampleSelectionList = listOf(
+            Selection(1),
+            Selection(2),
+            Selection(3),
+            Selection(4),
+            Selection(5),
+            Selection(6),
+        )
+
+        val FoodItemAdapter=FoodItemAdapter(exampleFoodItemList)
+        binding.rvFoodRecommendation.layoutManager=GridLayoutManager(requireActivity(),2)
+        binding.rvFoodRecommendation.addItemDecoration(GridSpacingItemDecoration(2,16,false))
+        binding.rvFoodRecommendation.adapter=FoodItemAdapter
+
+        binding.rvPopularFoods.layoutManager=GridLayoutManager(requireActivity(),2)
+        binding.rvPopularFoods.addItemDecoration(GridSpacingItemDecoration(2,16,false))
+        binding.rvPopularFoods.adapter=FoodItemAdapter
+
+
+        val SelectionAdapter=SelectionAdapter(exampleSelectionList)
+        binding.rvSelections.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvSelections.adapter=SelectionAdapter
     }
 }

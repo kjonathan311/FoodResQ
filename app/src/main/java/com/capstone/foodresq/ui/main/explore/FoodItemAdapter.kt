@@ -25,8 +25,15 @@ class FoodItemAdapter(
         holder.bind()
     }
 
+    private val limit = 4
+
+
     override fun getItemCount(): Int {
-        return FoodItemList.size
+        return if (FoodItemList.size > limit) {
+            limit
+        } else {
+            FoodItemList.size
+        }
     }
 
     inner class FoodItemViewHolder internal constructor(itemView: View): RecyclerView.ViewHolder(itemView){
