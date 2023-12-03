@@ -31,19 +31,6 @@ class ExploreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setData()
-
-        search=""
-        with(binding){
-            searchView.setupWithSearchBar(searchBar)
-            searchView
-                .editText
-                .setOnEditorActionListener { textView, i, keyEvent ->
-                    searchBar.setText(searchView.text)
-                    search=searchBar.text.toString()
-                    searchView.hide()
-                    false
-                }
-        }
     }
 
     private fun setData(){
