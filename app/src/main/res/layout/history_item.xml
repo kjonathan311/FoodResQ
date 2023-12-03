@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="6dp"
     android:background="@drawable/rounded_order_item"
     android:backgroundTint="@color/color_palette_1">
 
@@ -17,7 +18,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/rounded_corner_order_image_overlay"
-        tools:srcCompat="@tools:sample/backgrounds/scenic"></com.google.android.material.imageview.ShapeableImageView>
+        tools:srcCompat="@drawable/exampl_burg">
+
+    </com.google.android.material.imageview.ShapeableImageView>
 
 
     <TextView
@@ -27,6 +30,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="@string/order_title"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/iv_history"
@@ -39,6 +43,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/order_address"
+        android:textColor="@color/black"
         android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@+id/iv_history"
         app:layout_constraintTop_toBottomOf="@+id/tv_history_title" />
@@ -52,6 +57,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         android:text="@string/cancelled"
+        android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_history"
@@ -61,7 +67,7 @@
         android:id="@+id/tv_history_success"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/success"
         android:textColor="@android:color/holo_red_dark"

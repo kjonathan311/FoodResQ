@@ -1,4 +1,4 @@
-package com.capstone.foodresq.ui.main
+package com.capstone.foodresq.ui.main.explore
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,19 +8,13 @@ import android.view.ViewGroup
 import com.capstone.foodresq.R
 
 
-class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+class ExploreFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_explore, container, false)
     }
-
 }

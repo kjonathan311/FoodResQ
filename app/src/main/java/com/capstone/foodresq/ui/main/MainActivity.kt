@@ -5,6 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.capstone.foodresq.R
 import com.capstone.foodresq.databinding.ActivityMainBinding
+import com.capstone.foodresq.ui.main.explore.ExploreFragment
+import com.capstone.foodresq.ui.main.order.OrderFragment
+import com.capstone.foodresq.ui.main.profile.ProfileFragment
 
 private lateinit var binding:ActivityMainBinding
 
@@ -14,9 +17,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val ExploreFragment=ExploreFragment()
-        val OrderFragment=OrderFragment()
-        val ProfileFragment=ProfileFragment()
+        val ExploreFragment= ExploreFragment()
+        val OrderFragment= OrderFragment()
+        val ProfileFragment= ProfileFragment()
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container,ExploreFragment)
