@@ -22,5 +22,7 @@
     <string name="order_address">Smith Street 12</string>
     <string name="order_pickup_time">Pick-up time:12:00-18:00</string>
     <string name="order_time">04:02:30</string>
+    <string name="success">Succeed</string>
+    <string name="cancelled">Canceled by Customer</string>
 
 </resources>
