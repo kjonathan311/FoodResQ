@@ -13,4 +13,9 @@
         <item name="cornerSizeBottomLeft">30dp</item>
     </style>
 
+    <style name="rounded_corner_food_image_overlay">
+        <item name="cornerSizeTopRight">30dp</item>
+        <item name="cornerSizeTopLeft">30dp</item>
+    </style>
+
 </resources>

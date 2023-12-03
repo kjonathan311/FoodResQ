@@ -35,4 +35,8 @@
     <string name="partner_icon">ic_handshake</string>
     <string name="rate">Rate our app</string>
     <string name="rate_icon">ic_rate</string>
+
+
+    <string name="available">12 available</string>
+    <string name="food_Item_title">Burger Set 2</string>
 </resources>
