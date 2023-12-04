@@ -1,19 +1,24 @@
 package com.capstone.foodresq.ui.main.order.adapter
 
+import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
-import androidx.recyclerview.widget.DiffUtil
 import com.capstone.foodresq.data.History
 import com.capstone.foodresq.data.Order
 import com.google.android.material.imageview.ShapeableImageView
 
 
 class HistoryAdapter(
-    private val historyList: List<History>
+    private val historyList: List<History>,
+    private val clickListener: (History) -> Unit
 ): RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 //    ) : PagedListAdapter<Order, OrderAdapter.OrderViewHolder>(DIFF_CALLBACK){
 
@@ -24,7 +29,8 @@ class HistoryAdapter(
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        holder.bind()
+        val history=historyList.get(position)
+        holder.bind(history)
     }
 
     override fun getItemCount(): Int {
@@ -36,9 +42,13 @@ class HistoryAdapter(
         private val address:TextView=itemView.findViewById(R.id.tv_history_address)
         private val pickup:TextView=itemView.findViewById(R.id.tv_history_pickup)
         private val time:TextView=itemView.findViewById(R.id.tv_history_success)
+        private val btnRate:ImageButton=itemView.findViewById(R.id.btn_rate)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_history)
-        fun bind(){
+        fun bind(history: History){
             imageView.setImageResource(R.drawable.exampl_burg)
+            btnRate.setOnClickListener {
+                clickListener(history)
+            }
         }
     }
 

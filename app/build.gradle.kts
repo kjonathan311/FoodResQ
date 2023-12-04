@@ -57,7 +57,9 @@ dependencies {
 
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.material:material:1.6.0")
-
+    //paging
     implementation("androidx.paging:paging-runtime-ktx:2.1.2")
+    //barcode
+    implementation("com.google.zxing:core:3.4.1")
 
 }

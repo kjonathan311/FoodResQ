@@ -3,16 +3,19 @@ package com.capstone.foodresq.ui.main.order.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
 import androidx.recyclerview.widget.DiffUtil
+import com.capstone.foodresq.data.History
 import com.capstone.foodresq.data.Order
 import com.google.android.material.imageview.ShapeableImageView
 
 
 class OrderAdapter(
-    private val orderList: List<Order>
+    private val orderList: List<Order>,
+    private val clickListener: (Order) -> Unit
 ): RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 //    ) : PagedListAdapter<Order, OrderAdapter.OrderViewHolder>(DIFF_CALLBACK){
 
@@ -23,7 +26,8 @@ class OrderAdapter(
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        holder.bind()
+        val order=orderList.get(position)
+        holder.bind(order)
     }
 
     override fun getItemCount(): Int {
@@ -35,9 +39,14 @@ class OrderAdapter(
         private val address:TextView=itemView.findViewById(R.id.tv_order_address)
         private val pickup:TextView=itemView.findViewById(R.id.tv_order_pickup)
         private val time:TextView=itemView.findViewById(R.id.tv_order_time)
+        private val btnBarcode: ImageButton =itemView.findViewById(R.id.btn_barcode)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_order)
-        fun bind(){
+
+        fun bind(order: Order){
             imageView.setImageResource(R.drawable.exampl_burg)
+            btnBarcode.setOnClickListener {
+                clickListener(order)
+            }
         }
     }
 
