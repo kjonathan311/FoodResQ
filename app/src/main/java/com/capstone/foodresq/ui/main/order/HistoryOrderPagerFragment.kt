@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupWindow
+import androidx.core.view.marginLeft
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodresq.R
@@ -95,10 +96,11 @@ class HistoryOrderPagerFragment : Fragment() {
                 val popupView: View = LayoutInflater.from(requireActivity()).inflate(R.layout.rate_popup, null)
                 popupWindow = PopupWindow(
                     popupView,
-                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     true
                 )
+
                 var rate=5
                 val ivRate1:ImageView=popupView.findViewById(R.id.iv_star_1)
                 val ivRate2:ImageView=popupView.findViewById(R.id.iv_star_2)

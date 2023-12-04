@@ -36,11 +36,7 @@ class ProfileFragment : Fragment() {
         binding.btnSubscription.setIcon(getString(R.string.subscription_icon))
         binding.btnSettings.setTitle(getString(R.string.settings))
         binding.btnSettings.setIcon(getString(R.string.settings_icon))
-        binding.btnPartner.setTitle(getString(R.string.partner))
-        binding.btnPartner.setIcon(getString(R.string.partner_icon))
-        binding.btnRate.setTitle(getString(R.string.rate))
-        binding.btnRate.setIcon(getString(R.string.rate_icon))
-        binding.btnRate.setOnClickListener {
+        binding.btnSettings.setOnClickListener {
             Toast.makeText(requireActivity(),"Future Content",Toast.LENGTH_SHORT).show()
         }
     }

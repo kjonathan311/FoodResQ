@@ -90,22 +90,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_subscription" />
 
-    <com.capstone.foodresq.ui.main.profile.SettingButtonView
-        android:id="@+id/btn_partner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_settings" />
-
-    <com.capstone.foodresq.ui.main.profile.SettingButtonView
-        android:id="@+id/btn_rate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_partner" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
