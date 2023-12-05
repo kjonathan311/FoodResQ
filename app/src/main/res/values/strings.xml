@@ -17,11 +17,37 @@
     <string name="textPassword">Password</string>
     <string name="logIn">Login</string>
     <string name="navigateToregister">New user? Please register</string>
+    
+    <!-- register -->
+    <string name="welcome_register">Welcome!\nWe are happy you could join us.</string>
+    <string name="select_type_user">Select Type of User</string>
+    <string-array name="type_user">
+        <item>Restaurant</item>
+        <item>Customer</item>
+    </string-array>
+    <string name="restaurant">Restaurant</string>
+    <string name="navigateTologin">Already have account? Please login</string>
+    <string name="btn_back">Button Back</string>
+    <string name="product_name">Burger Set 2</string>
+    <string name="price_before_discount"><strike>60K</strike></string>
+    <string name="price_after_discount">Rp 25K</string>
+    <string name="timer">04:02:30</string>
+    <string name="product_content">1 Burger, fries and chili sauce</string>
+    <string name="more_details">more details</string>
+    <string name="restaurant_name">Burger Joint 5</string>
+    <string name="restaurant_address">Smith Street 12</string>
+    <string name="pick_up_time">Pick&#8211;up time : 12:00&#8211;18:00</string>
+    <string name="rating">4.5/5</string>
+    <string name="count">1</string>
+    <string name="btn_minus">Button Minus</string>
+    <string name="button_plus">Button Plus</string>
+    <string name="order">Order</string>
+    <string name="dropdwonUserType">Drop Dwon User Type</string>
 
     <!-- Order/History-->
     <string name="order_title">Burger Joint 1</string>
     <string name="order_address">Smith Street 12</string>
-    <string name="order_pickup_time">Pick-up time:12:00-18:00</string>
+    <string name="order_pickup_time">Pick&#8211;up time:12:00&#8211;18:00</string>
     <string name="order_time">04:02:30</string>
     <string name="success">Succeed</string>
     <string name="cancelled">Canceled by Customer</string>
@@ -43,4 +69,7 @@
     <string name="scan_here">Scan Here</string>
     <string name="cancel">C A N C E L</string>
     <string name="thank_you_rate">Thank you for the review</string>
+    <string name="image_product">Image Product</string>
+    <string name="restaurant_image">Restaurant Profile</string>
+    <string name="star">Star Rating</string>
 </resources>
