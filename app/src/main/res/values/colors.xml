@@ -12,5 +12,6 @@
     <color name="color_text_1">#090A0A</color>
     <color name="color_text_2">#838181</color>
     <color name="color_text_3">#FB3737</color>
+    <color name="color_text_4">#1C50D5</color>
     <color name="transparant">#00FFFFFF</color>
 </resources>
