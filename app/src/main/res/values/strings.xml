@@ -72,4 +72,6 @@
     <string name="image_product">Image Product</string>
     <string name="restaurant_image">Restaurant Profile</string>
     <string name="star">Star Rating</string>
+    <string name="register">Register</string>
+    <string name="text_user_type">Text User Type</string>
 </resources>

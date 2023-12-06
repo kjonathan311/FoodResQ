@@ -106,10 +106,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.capstone.foodresq.ui.customView.ButtonCustomView
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/logIn"
+        android:text="@string/register"
         android:textSize="16sp"
         tools:enabled="false"
         android:layout_marginStart="20dp"
@@ -119,15 +119,20 @@
         android:background="@drawable/rounded_button"/>
 
     <TextView
+        android:id="@+id/txt_navigateToLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/navigateTologin"
         android:textAlignment="center"
         android:textSize="16sp"
         android:textColor="@color/color_palette_5"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"/>
+
+    <include
+        android:id="@+id/layout_loading"
+        layout="@layout/loading_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
