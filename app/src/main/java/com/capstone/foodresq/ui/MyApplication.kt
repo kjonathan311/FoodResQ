@@ -4,6 +4,10 @@ import android.app.Application
 import android.content.res.Configuration
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
+import com.capstone.foodresq.data.di.apiModule
+import com.capstone.foodresq.data.di.customerModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class MyApplication : Application() {
 
@@ -18,6 +22,12 @@ class MyApplication : Application() {
             val config = resources.configuration
             config.uiMode = config.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()
             resources.updateConfiguration(config, resources.displayMetrics)
+        }
+
+        //Koin Injection
+        startKoin {
+            androidContext(this@MyApplication)
+            modules(customerModule, apiModule)
         }
     }
 }

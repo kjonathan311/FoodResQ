@@ -1,13 +1,17 @@
 package com.capstone.foodresq.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.capstone.foodresq.R
 import com.capstone.foodresq.databinding.ActivityMainBinding
+import com.capstone.foodresq.ui.detail.DetailActivity
+import com.capstone.foodresq.ui.login.LoginActivity
 import com.capstone.foodresq.ui.main.explore.ExploreFragment
 import com.capstone.foodresq.ui.main.order.OrderFragment
 import com.capstone.foodresq.ui.main.profile.ProfileFragment
+import com.capstone.foodresq.ui.register.RegisterActivity
 
 private lateinit var binding:ActivityMainBinding
 
@@ -16,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        startActivity(Intent(this, DetailActivity::class.java))
 
         val ExploreFragment= ExploreFragment()
         val OrderFragment= OrderFragment()
