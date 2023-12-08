@@ -1,4 +1,7 @@
 package com.capstone.foodresq.ui.main.profile
 
-class ProfileViewModel {
+import androidx.lifecycle.ViewModel
+
+class ProfileViewModel: ViewModel() {
+
 }

@@ -1,4 +1,7 @@
 package com.capstone.foodresq.ui.main.explore
 
-class ExploreViewModel {
+import androidx.lifecycle.ViewModel
+
+class ExploreViewModel(): ViewModel() {
+
 }

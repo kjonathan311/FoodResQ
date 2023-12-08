@@ -1,4 +1,6 @@
 package com.capstone.foodresq.ui.main.order
 
-class HistoryOrderViewModel {
+import androidx.lifecycle.ViewModel
+
+class HistoryOrderViewModel(): ViewModel() {
 }
