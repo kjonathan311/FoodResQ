@@ -1,16 +1,20 @@
 package com.capstone.foodresq.ui.main.explore
 
 import android.R.attr.spacing
+import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodresq.data.FoodItem
 import com.capstone.foodresq.data.Selection
 import com.capstone.foodresq.databinding.FragmentExploreBinding
+import com.capstone.foodresq.ui.list.ListActivity
 import com.capstone.foodresq.utils.GridSpacingItemDecoration
 
 
@@ -30,6 +34,21 @@ class ExploreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.exploreSearch.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
+                // Open the search activity when the Enter key is pressed
+                val intent = Intent(requireActivity(), ListActivity::class.java)
+                intent.putExtra("search",binding.exploreSearch.text)
+                startActivity(intent)
+                return@setOnEditorActionListener true
+            }
+            false
+        }
+        binding.layoutSearch.setStartIconOnClickListener {
+            val intent = Intent(requireActivity(), ListActivity::class.java)
+            intent.putExtra("search",binding.exploreSearch.text)
+            startActivity(intent)
+        }
         setData()
     }
 

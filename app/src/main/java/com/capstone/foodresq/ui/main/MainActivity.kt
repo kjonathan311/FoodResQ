@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startActivity(Intent(this, DetailActivity::class.java))
 
         val ExploreFragment= ExploreFragment()
         val OrderFragment= OrderFragment()

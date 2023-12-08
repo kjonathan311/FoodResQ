@@ -27,10 +27,14 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setUpView()
-        setButtonLoginEnable()
+//        setButtonLoginEnable()
         onTextInputChanged()
         buttonLoginHandler()
         setRegisterHandler()
+
+        binding.btnLogin.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+        }
     }
 
     private fun setButtonLoginEnable(){
@@ -80,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                     showLoading(true)
                     startActivity(intent)
                     showLoading(false)
-                }, 3000)
+                }, 100)
             }
         }
     }
@@ -94,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 showLoading(false)
                 binding.txtNavigateToRegister.setTextColor(resources.getColor(R.color.color_palette_5))
-            }, 2000)
+            }, 100)
         }
     }
 

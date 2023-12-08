@@ -7,7 +7,7 @@
     tools:context=".ui.main.explore.ExploreFragment" >
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/layout_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -19,6 +19,7 @@
         app:startIconDrawable="@drawable/ic_search">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/explore_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search" />
@@ -27,12 +28,11 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/layout_search">
 
         <LinearLayout
             android:layout_width="match_parent"
