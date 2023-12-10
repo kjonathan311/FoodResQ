@@ -1,5 +1,6 @@
 package com.capstone.foodresq.ui.main.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.capstone.foodresq.R
 import com.capstone.foodresq.databinding.FragmentProfileBinding
+import com.capstone.foodresq.ui.subscription.SubscriptionActivity
 
 
 class ProfileFragment : Fragment() {
@@ -34,6 +36,9 @@ class ProfileFragment : Fragment() {
     private fun setSettingData(){
         binding.btnSubscription.setTitle(getString(R.string.subscription))
         binding.btnSubscription.setIcon(getString(R.string.subscription_icon))
+        binding.btnSubscription.setOnClickListener {
+            startActivity(Intent(requireActivity(),SubscriptionActivity::class.java))
+        }
         binding.btnSettings.setTitle(getString(R.string.settings))
         binding.btnSettings.setIcon(getString(R.string.settings_icon))
         binding.btnSettings.setOnClickListener {

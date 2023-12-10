@@ -1,5 +1,6 @@
 package com.capstone.foodresq.ui.main.order
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.capstone.foodresq.R
 import com.capstone.foodresq.data.History
 import com.capstone.foodresq.data.Order
 import com.capstone.foodresq.databinding.FragmentHistoryOrderPagerBinding
+import com.capstone.foodresq.ui.detail_order.DetailOrderActivity
 import com.capstone.foodresq.ui.main.order.adapter.HistoryAdapter
 import com.capstone.foodresq.ui.main.order.adapter.OrderAdapter
 import com.capstone.foodresq.utils.Utils
@@ -59,7 +61,7 @@ class HistoryOrderPagerFragment : Fragment() {
 
         if (index==1){
             //order
-            val orderAdapter= OrderAdapter(exampleOrderList) {
+            val orderAdapter= OrderAdapter(exampleOrderList, clickListener = {
                 val popupView: View =
                     LayoutInflater.from(requireActivity()).inflate(R.layout.qrcode_popup, null)
                 popupWindow = PopupWindow(
@@ -86,7 +88,12 @@ class HistoryOrderPagerFragment : Fragment() {
                     0,
                     0
                 )
+            }, detailOrderClickListener = {
+                val intent= Intent(requireActivity(),DetailOrderActivity::class.java)
+                intent.putExtra("order",it.id)
+                startActivity(intent)
             }
+            )
             binding.rvOrder.adapter=orderAdapter
             binding.rvOrder.layoutManager= LinearLayoutManager(requireContext())
 
@@ -164,6 +171,7 @@ class HistoryOrderPagerFragment : Fragment() {
         }
 
     }
+
 
     companion object{
         const val PAGER_NUMBER = "1"

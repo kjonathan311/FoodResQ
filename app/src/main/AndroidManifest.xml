@@ -14,6 +14,9 @@
         android:theme="@style/Theme.FoodResQ"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.detailorder.DetailOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail_order.DetailOrderActivity"
             android:exported="false" />
         <activity

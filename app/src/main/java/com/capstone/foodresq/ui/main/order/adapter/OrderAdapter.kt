@@ -15,6 +15,7 @@ import com.google.android.material.imageview.ShapeableImageView
 
 class OrderAdapter(
     private val orderList: List<Order>,
+    private val detailOrderClickListener: (Order)->Unit,
     private val clickListener: (Order) -> Unit
 ): RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 //    ) : PagedListAdapter<Order, OrderAdapter.OrderViewHolder>(DIFF_CALLBACK){
@@ -46,6 +47,9 @@ class OrderAdapter(
             imageView.setImageResource(R.drawable.exampl_burg)
             btnBarcode.setOnClickListener {
                 clickListener(order)
+            }
+            itemView.setOnClickListener {
+                detailOrderClickListener(order)
             }
         }
     }
