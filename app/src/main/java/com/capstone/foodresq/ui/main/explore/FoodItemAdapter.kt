@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
 import com.capstone.foodresq.data.FoodItem
+import com.capstone.foodresq.data.Order
 import com.google.android.material.imageview.ShapeableImageView
 
 class FoodItemAdapter(
-    private val FoodItemList: List<FoodItem>
+    private val FoodItemList: List<FoodItem>,
+    private val clickListener: (FoodItem) -> Unit
 ): RecyclerView.Adapter<FoodItemAdapter.FoodItemViewHolder>() {
 //    ) : PagedListAdapter<FoodItem, FoodItemAdapter.FoodItemViewHolder>(DIFF_CALLBACK){
 
@@ -22,7 +24,8 @@ class FoodItemAdapter(
     }
 
     override fun onBindViewHolder(holder: FoodItemViewHolder, position: Int) {
-        holder.bind()
+        val foodItem=FoodItemList.get(position)
+        holder.bind(foodItem)
     }
 
     private val limit = 4
@@ -41,8 +44,11 @@ class FoodItemAdapter(
         private val price: TextView =itemView.findViewById(R.id.tv_food_item_price)
         private val available: TextView =itemView.findViewById(R.id.tv_food_item_available)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_food_item)
-        fun bind(){
+        fun bind(item:FoodItem){
             imageView.setImageResource(R.drawable.food_item_examp)
+            itemView.setOnClickListener {
+                clickListener(item)
+            }
         }
     }
 

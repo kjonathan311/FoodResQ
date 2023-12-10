@@ -12,7 +12,8 @@ import com.capstone.foodresq.ui.main.explore.FoodItemAdapter
 import com.google.android.material.imageview.ShapeableImageView
 
 class ListAdapter(
-    private val FoodItemList: List<FoodItem>
+    private val FoodItemList: List<FoodItem>,
+    private val clickListener: (FoodItem) -> Unit
 ): RecyclerView.Adapter<ListAdapter.FoodItemViewHolder>() {
 //    ) : PagedListAdapter<FoodItem, FoodItemAdapter.FoodItemViewHolder>(DIFF_CALLBACK){
 
@@ -23,7 +24,8 @@ class ListAdapter(
     }
 
     override fun onBindViewHolder(holder: FoodItemViewHolder, position: Int) {
-        holder.bind()
+        val foodItem=FoodItemList.get(position)
+        holder.bind(foodItem)
     }
 
 
@@ -36,8 +38,11 @@ class ListAdapter(
         private val price: TextView =itemView.findViewById(R.id.tv_food_item_price)
         private val available: TextView =itemView.findViewById(R.id.tv_food_item_available)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_food_item)
-        fun bind(){
+        fun bind(item: FoodItem){
             imageView.setImageResource(R.drawable.food_item_examp)
+            itemView.setOnClickListener {
+                clickListener(item)
+            }
         }
     }
 

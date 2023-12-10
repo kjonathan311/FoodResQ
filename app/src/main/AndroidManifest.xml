@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
     <application
         android:name=".ui.MyApplication"
         android:allowBackup="true"
@@ -14,7 +18,7 @@
         android:theme="@style/Theme.FoodResQ"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.detailorder.DetailOrderActivity"
+            android:name=".ui.map.MapsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.detail_order.DetailOrderActivity"

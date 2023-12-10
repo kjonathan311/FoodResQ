@@ -1,11 +1,13 @@
 package com.capstone.foodresq.ui.list
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstone.foodresq.R
 import com.capstone.foodresq.data.FoodItem
 import com.capstone.foodresq.databinding.ActivityListBinding
+import com.capstone.foodresq.ui.detail.DetailActivity
 import com.capstone.foodresq.ui.main.explore.FoodItemAdapter
 import com.capstone.foodresq.utils.GridSpacingItemDecoration
 
@@ -34,7 +36,9 @@ class ListActivity : AppCompatActivity() {
             FoodItem(3),
             FoodItem(4),
         )
-        val FoodItemAdapter= FoodItemAdapter(exampleFoodItemList)
+        val FoodItemAdapter= FoodItemAdapter(exampleFoodItemList){
+            startActivity(Intent(this,DetailActivity::class.java))
+        }
         binding.rvList.layoutManager= GridLayoutManager(this,2)
         binding.rvList.addItemDecoration(GridSpacingItemDecoration(2,16,false))
         binding.rvList.adapter=FoodItemAdapter

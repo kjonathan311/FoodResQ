@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodresq.data.FoodItem
 import com.capstone.foodresq.data.Selection
 import com.capstone.foodresq.databinding.FragmentExploreBinding
+import com.capstone.foodresq.ui.detail.DetailActivity
 import com.capstone.foodresq.ui.list.ListActivity
 import com.capstone.foodresq.utils.GridSpacingItemDecoration
 
@@ -69,7 +70,9 @@ class ExploreFragment : Fragment() {
             Selection(6),
         )
 
-        val FoodItemAdapter=FoodItemAdapter(exampleFoodItemList)
+        val FoodItemAdapter=FoodItemAdapter(exampleFoodItemList){
+            startActivity(Intent(requireActivity(),DetailActivity::class.java))
+        }
         binding.rvFoodRecommendation.layoutManager=GridLayoutManager(requireActivity(),2)
         binding.rvFoodRecommendation.addItemDecoration(GridSpacingItemDecoration(2,16,false))
         binding.rvFoodRecommendation.adapter=FoodItemAdapter
