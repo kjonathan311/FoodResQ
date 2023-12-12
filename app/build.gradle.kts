@@ -27,12 +27,16 @@ android {
     }
 
     buildTypes {
+        debug{
+            resValue("string","google_maps_api_key","AIzaSyByunX04TU2K2KNxS4WyWZx3kBtRlCIIKQ")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            resValue("string","google_maps_api_key","AIzaSyByunX04TU2K2KNxS4WyWZx3kBtRlCIIKQ")
         }
     }
     compileOptions {
@@ -71,5 +75,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.8")
     //Map
     implementation("com.google.android.gms:play-services-maps:17.0.1")
-
+    //Datastore
+    implementation("androidx.datastore:datastore-core:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }

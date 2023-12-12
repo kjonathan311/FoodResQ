@@ -1,6 +1,8 @@
 package com.capstone.foodresq.data.di
 
+import com.capstone.foodresq.data.datastore.UserPreference
 import com.capstone.foodresq.data.remote.retrofit.ApiService
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,24 +17,24 @@ val apiModule = module {
 
     factory {
         val loggingInterceptor: HttpLoggingInterceptor = get()
-        //val userPreference: UserPreference = get()
+        val userPreference: UserPreference = get()
 
         val client = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .addInterceptor { chain ->
                 val original = chain.request()
                 val requestBuilder = original.newBuilder()
-//                val token = runBlocking {
-//                    userPreference.getSession().first().token
-//                }
-//                requestBuilder.header("Authorization", "Bearer $token")
+                val token = runBlocking {
+                    userPreference.getSession().first().token
+                }
+                requestBuilder.header("Authorization", "Bearer $token")
                 val newRequest = requestBuilder.build()
                 chain.proceed(newRequest)
             }
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://story-api.dicoding.dev/v1/")
+            .baseUrl("https://resq-seven.vercel.app/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
