@@ -9,12 +9,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupWindow
-import androidx.core.view.marginLeft
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.History
-import com.capstone.foodresq.data.Order
+import com.capstone.foodresq.data.classes.History
+import com.capstone.foodresq.data.classes.Order
 import com.capstone.foodresq.databinding.FragmentHistoryOrderPagerBinding
 import com.capstone.foodresq.ui.detail_order.DetailOrderActivity
 import com.capstone.foodresq.ui.main.order.adapter.HistoryAdapter

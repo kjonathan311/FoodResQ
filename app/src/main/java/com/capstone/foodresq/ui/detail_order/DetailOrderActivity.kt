@@ -2,15 +2,10 @@ package com.capstone.foodresq.ui.detail_order
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.FoodItemOrder
-import com.capstone.foodresq.data.Selection
+import com.capstone.foodresq.data.classes.FoodItemOrder
 import com.capstone.foodresq.databinding.ActivityDetailOrderBinding
-import com.capstone.foodresq.databinding.ActivityMainBinding
-import com.capstone.foodresq.ui.main.explore.FoodItemAdapter
-import com.capstone.foodresq.utils.GridSpacingItemDecoration
 
 class DetailOrderActivity : AppCompatActivity() {
 

@@ -15,6 +15,7 @@ import com.capstone.foodresq.R
 import com.capstone.foodresq.databinding.ActivityRegisterBinding
 import com.capstone.foodresq.ui.login.LoginActivity
 import com.capstone.foodresq.utils.Utils
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private var itemSelected : String? = null
 
+    private val registerViewModel:RegisterViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -36,10 +38,14 @@ class RegisterActivity : AppCompatActivity() {
             itemSelected = adapterView.getItemAtPosition(position).toString()
         }
 
-        setButtonRegisterEnabled()
-        onTextFieldChanged()
+//        setButtonRegisterEnabled()
+//        onTextFieldChanged()
         setLoginHandler()
         buttonRegisterHandler()
+
+        registerViewModel.loading.observe(this){
+            showLoading(it)
+        }
     }
 
     private fun onTextFieldChanged(){
@@ -86,13 +92,21 @@ class RegisterActivity : AppCompatActivity() {
             if (itemSelected == null){
                 binding.dropDownTypeUser.error = "Please define your user type"
             } else{
-                val message = "Your new account already set. Let's get in!"
-                val title = "Success"
-                makeAlert(message, title)
-
-                binding.textInputEditEmail.text = null
-                binding.textInputEditPassword.text = null
-                itemSelected = null
+                val name=binding.textInputEditName.text.toString()
+                val email=binding.textInputEditEmail.text.toString()
+                val password=binding.textInputEditPassword.text.toString()
+                registerViewModel.register(name,email,password)
+                registerViewModel.errorMessage.observe(this){
+                    if(it!=null){
+                        showAlertDialog("error",it)
+                    }
+                }
+                registerViewModel.successMessage.observe(this){
+                    if(it!=null){
+                        showAlertDialog("Success","Your new account already set. Let's get in!")
+                        setLoginHandler()
+                    }
+                }
             }
         }
     }
@@ -100,18 +114,12 @@ class RegisterActivity : AppCompatActivity() {
     private fun setLoginHandler() {
         binding.txtNavigateToLogin.setOnClickListener {
             val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-            Handler(Looper.getMainLooper()).postDelayed({
-                showLoading(true)
-                binding.txtNavigateToLogin.setTextColor(resources.getColor(R.color.color_text_4))
-                startActivity(intent)
-                showLoading(false)
-                binding.txtNavigateToLogin.setTextColor(resources.getColor(R.color.color_palette_5))
-            }, 3000)
-
+            startActivity(intent)
+            finish()
         }
     }
 
-    private fun makeAlert(message : String, title : String){
+    private fun showAlertDialog(title : String,message : String){
         AlertDialog.Builder(this)
             .setMessage(message)
             .setTitle(title)

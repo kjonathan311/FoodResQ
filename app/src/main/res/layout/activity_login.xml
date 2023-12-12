@@ -39,20 +39,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintTop_toBottomOf="@id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <com.capstone.foodresq.ui.customView.EmailTextFieldCustomView
             android:id="@+id/textInputEdit_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/textEmail"
-            android:fontFamily="sans-serif-condensed"
             android:ems="10"
-            android:inputType="textEmailAddress"/>
+            android:fontFamily="sans-serif-condensed"
+            android:hint="@string/textEmail"
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,14 +96,15 @@
         android:id="@+id/txt_navigateToRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:padding="10dp"
         android:text="@string/navigateToregister"
         android:textAlignment="center"
-        android:textSize="16sp"
         android:textColor="@color/color_palette_5"
-        app:layout_constraintTop_toBottomOf="@id/btn_login"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
     <include
         android:id="@+id/layout_loading"

@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.Selection
+import com.capstone.foodresq.data.classes.Selection
 
 class SelectionAdapter(
     private val SelectionList: List<Selection>

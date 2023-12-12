@@ -7,8 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.FoodItem
-import com.capstone.foodresq.ui.main.explore.FoodItemAdapter
+import com.capstone.foodresq.data.classes.FoodItem
 import com.google.android.material.imageview.ShapeableImageView
 
 class ListAdapter(

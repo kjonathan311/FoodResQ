@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.FoodItem
+import com.capstone.foodresq.data.classes.FoodItem
 import com.capstone.foodresq.databinding.ActivityListBinding
 import com.capstone.foodresq.ui.detail.DetailActivity
 import com.capstone.foodresq.ui.main.explore.FoodItemAdapter

@@ -1,4 +1,7 @@
 package com.capstone.foodresq.data.repository
 
-class ExploreRepository {
+import com.capstone.foodresq.data.remote.retrofit.ApiService
+
+class ExploreRepository(private val apiService: ApiService) {
+
 }

@@ -3,13 +3,11 @@ package com.capstone.foodresq.ui.map
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.FoodItem
+import com.capstone.foodresq.data.classes.FoodItem
 import com.capstone.foodresq.databinding.ActivityMapsBinding
 import com.capstone.foodresq.ui.detail.DetailActivity
-import com.capstone.foodresq.ui.main.explore.ExploreFragment
 import com.capstone.foodresq.ui.main.explore.FoodItemAdapter
 import com.capstone.foodresq.utils.GridSpacingItemDecoration
 

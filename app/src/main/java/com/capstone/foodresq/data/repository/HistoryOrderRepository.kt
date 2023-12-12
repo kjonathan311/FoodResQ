@@ -1,4 +1,6 @@
 package com.capstone.foodresq.data.repository
 
-class HistoryOrderRepository {
+import com.capstone.foodresq.data.remote.retrofit.ApiService
+
+class HistoryOrderRepository(private val apiService: ApiService) {
 }

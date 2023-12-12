@@ -7,8 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.FoodItem
-import com.capstone.foodresq.data.Order
+import com.capstone.foodresq.data.classes.FoodItem
 import com.google.android.material.imageview.ShapeableImageView
 
 class FoodItemAdapter(
@@ -44,7 +43,7 @@ class FoodItemAdapter(
         private val price: TextView =itemView.findViewById(R.id.tv_food_item_price)
         private val available: TextView =itemView.findViewById(R.id.tv_food_item_available)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_food_item)
-        fun bind(item:FoodItem){
+        fun bind(item: FoodItem){
             imageView.setImageResource(R.drawable.food_item_examp)
             itemView.setOnClickListener {
                 clickListener(item)

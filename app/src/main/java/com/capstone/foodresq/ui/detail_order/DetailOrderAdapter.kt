@@ -3,15 +3,11 @@ package com.capstone.foodresq.ui.detail_order
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.FoodItemOrder
-import com.capstone.foodresq.data.Order
-import com.capstone.foodresq.ui.main.order.adapter.OrderAdapter
-import com.google.android.material.imageview.ShapeableImageView
+import com.capstone.foodresq.data.classes.FoodItemOrder
 
 class DetailOrderAdapter(
     private val foodOrderList: List<FoodItemOrder>,
@@ -39,7 +35,7 @@ class DetailOrderAdapter(
         private val picture: ImageView = itemView.findViewById(R.id.iv_detail_order)
         private val quantity: TextView = itemView.findViewById(R.id.tv_detail_quantity)
 
-        fun bind(item:FoodItemOrder) {
+        fun bind(item: FoodItemOrder) {
             picture.setImageResource(R.drawable.food_item_examp)
         }
     }

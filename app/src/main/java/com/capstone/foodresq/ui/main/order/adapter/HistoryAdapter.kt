@@ -1,18 +1,15 @@
 package com.capstone.foodresq.ui.main.order.adapter
 
-import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.History
-import com.capstone.foodresq.data.Order
+import com.capstone.foodresq.data.classes.History
+import com.capstone.foodresq.data.classes.Order
 import com.google.android.material.imageview.ShapeableImageView
 
 

@@ -1,5 +1,6 @@
 package com.capstone.foodresq.ui.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -10,17 +11,25 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import com.capstone.foodresq.R
+import com.capstone.foodresq.data.datastore.UserModel
 import com.capstone.foodresq.databinding.ActivityLoginBinding
 import com.capstone.foodresq.ui.main.MainActivity
 import com.capstone.foodresq.ui.register.RegisterActivity
 import com.capstone.foodresq.utils.Utils
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
     private var _binding : ActivityLoginBinding? = null
     private val binding get() = _binding!!
+
+    private val loginViewModel:LoginViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -28,12 +37,43 @@ class LoginActivity : AppCompatActivity() {
 
         setUpView()
 //        setButtonLoginEnable()
-        onTextInputChanged()
-        buttonLoginHandler()
+//        onTextInputChanged()
+//        buttonLoginHandler()
         setRegisterHandler()
 
+        loginViewModel.loading.observe(this){
+            showLoading(it)
+        }
         binding.btnLogin.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            LoginUser()
+        }
+    }
+
+    private fun LoginUser(){
+        val checkSessionLogin = MutableLiveData<Boolean>()
+        val email=binding.textInputEditEmail.text.toString()
+        val password=binding.textInputEditPassword.text.toString()
+        loginViewModel.login(email,password)
+        loginViewModel.successResult.observe(this){
+            if (it!=null){
+                checkSessionLogin.value=true
+                loginViewModel.saveSession(UserModel(it.token.toString()))
+            }
+        }
+        loginViewModel.errorMessage.observe(this){
+            if (it!=null){
+                showAlertDialog(this,"error",it)
+            }
+        }
+        checkSessionLogin.observe(this){
+            lifecycleScope.launch {
+                loginViewModel.getSession().observe(this@LoginActivity){
+                    if(it!=null){
+                        startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                        finish()
+                    }
+                }
+            }
         }
     }
 
@@ -92,13 +132,8 @@ class LoginActivity : AppCompatActivity() {
     private fun setRegisterHandler(){
         binding.txtNavigateToRegister.setOnClickListener {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-            Handler(Looper.getMainLooper()).postDelayed({
-                showLoading(true)
-                binding.txtNavigateToRegister.setTextColor(resources.getColor(R.color.color_text_4))
-                startActivity(intent)
-                showLoading(false)
-                binding.txtNavigateToRegister.setTextColor(resources.getColor(R.color.color_palette_5))
-            }, 100)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -118,5 +153,16 @@ class LoginActivity : AppCompatActivity() {
         }
         supportActionBar?.hide()
     }
+
+    fun showAlertDialog(context: Context, errorTitle:String, errorMessage: String) {
+        AlertDialog.Builder(context)
+            .setTitle(errorTitle)
+            .setMessage(errorMessage)
+            .setPositiveButton("Ok") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
 
 }

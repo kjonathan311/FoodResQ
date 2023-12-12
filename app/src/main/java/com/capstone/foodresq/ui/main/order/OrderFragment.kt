@@ -6,13 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.paging.PagedList
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
-import com.capstone.foodresq.data.History
-import com.capstone.foodresq.data.Order
 import com.capstone.foodresq.databinding.FragmentOrderBinding
-import com.capstone.foodresq.ui.main.MainActivity
 import com.capstone.foodresq.ui.main.order.adapter.OrderHistoryPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 

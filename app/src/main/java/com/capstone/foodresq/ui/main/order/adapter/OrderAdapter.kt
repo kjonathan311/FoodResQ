@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
 import androidx.recyclerview.widget.DiffUtil
-import com.capstone.foodresq.data.History
-import com.capstone.foodresq.data.Order
+import com.capstone.foodresq.data.classes.Order
 import com.google.android.material.imageview.ShapeableImageView
 
 

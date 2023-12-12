@@ -5,16 +5,37 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.capstone.foodresq.data.datastore.UserPreference
+import com.capstone.foodresq.data.repository.ExploreRepository
+import com.capstone.foodresq.data.repository.HistoryOrderRepository
+import com.capstone.foodresq.data.repository.LoginRepository
+import com.capstone.foodresq.data.repository.ProfileRepository
+import com.capstone.foodresq.data.repository.RegisterRepository
+import com.capstone.foodresq.data.repository.UserRepository
+import com.capstone.foodresq.ui.login.LoginViewModel
+import com.capstone.foodresq.ui.main.MainViewModel
+import com.capstone.foodresq.ui.register.RegisterViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val customerModule= module {
-    single {
-        provideDataStore(androidContext())
-    }
-    single{
-        UserPreference(get())
-    }
+
+    //Datastore
+    single { provideDataStore(androidContext()) }
+    single { UserPreference(get()) }
+
+    //repositories
+    single { ExploreRepository(get()) }
+    single { HistoryOrderRepository(get()) }
+    single { LoginRepository(get()) }
+    single { ProfileRepository(get()) }
+    single { RegisterRepository(get()) }
+    single { UserRepository(get()) }
+
+    //viewModels
+    single { LoginViewModel(get(),get()) }
+    single { RegisterViewModel(get()) }
+    single { MainViewModel(get()) }
+
 }
 fun provideDataStore(context: Context): DataStore<Preferences> {
     return context.dataStore

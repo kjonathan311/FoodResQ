@@ -1,6 +1,5 @@
 package com.capstone.foodresq.ui.main.explore
 
-import android.R.attr.spacing
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,8 +10,8 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.foodresq.data.FoodItem
-import com.capstone.foodresq.data.Selection
+import com.capstone.foodresq.data.classes.FoodItem
+import com.capstone.foodresq.data.classes.Selection
 import com.capstone.foodresq.databinding.FragmentExploreBinding
 import com.capstone.foodresq.ui.detail.DetailActivity
 import com.capstone.foodresq.ui.list.ListActivity
