@@ -2,24 +2,27 @@ package com.capstone.foodresq.data.remote.retrofit
 
 import com.capstone.foodresq.data.remote.response.LoginResponse
 import com.capstone.foodresq.data.remote.response.RegisterResponse
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface ApiService {
-    @FormUrlEncoded
-    @POST("register")
-    suspend fun register(
-        @Field("name") name: String,
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): RegisterResponse
 
-    @FormUrlEncoded
+interface ApiService {
+
+    @POST("register")
+    suspend fun register(@Body body: registerBody?): RegisterResponse
+
     @POST("login")
-    suspend fun login(
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): LoginResponse
+    suspend fun login(@Body body: loginBody?):LoginResponse
 
 }
+data class registerBody(
+    val name: String,
+    val email: String,
+    val password: String
+)
+data class loginBody(
+    val email: String,
+    val password: String
+)

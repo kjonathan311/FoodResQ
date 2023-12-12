@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
@@ -36,9 +37,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setUpView()
-//        setButtonLoginEnable()
-//        onTextInputChanged()
-//        buttonLoginHandler()
+        setButtonLoginEnable()
+        onTextInputChanged()
         setRegisterHandler()
 
         loginViewModel.loading.observe(this){
@@ -69,6 +69,8 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 loginViewModel.getSession().observe(this@LoginActivity){
                     if(it!=null){
+                        Log.d("check",it.token)
+                        Log.d("check",it.isLogin.toString())
                         startActivity(Intent(this@LoginActivity,MainActivity::class.java))
                         finish()
                     }
@@ -116,18 +118,6 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    private fun buttonLoginHandler(){
-        if (binding.btnLogin.isEnabled){
-            binding.btnLogin.setOnClickListener {
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    showLoading(true)
-                    startActivity(intent)
-                    showLoading(false)
-                }, 100)
-            }
-        }
-    }
 
     private fun setRegisterHandler(){
         binding.txtNavigateToRegister.setOnClickListener {

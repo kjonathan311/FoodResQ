@@ -38,8 +38,8 @@ class RegisterActivity : AppCompatActivity() {
             itemSelected = adapterView.getItemAtPosition(position).toString()
         }
 
-//        setButtonRegisterEnabled()
-//        onTextFieldChanged()
+        setButtonRegisterEnabled()
+        onTextFieldChanged()
         setLoginHandler()
         buttonRegisterHandler()
 
@@ -83,8 +83,9 @@ class RegisterActivity : AppCompatActivity() {
     private fun setButtonRegisterEnabled() {
         val email = binding.textInputEditEmail.text.toString()
         val password = binding.textInputEditPassword.text.toString()
+        val name=binding.textInputEditName.text.toString()
 
-        binding.btnRegister.isEnabled = email.isNotEmpty() && password.isNotEmpty() && Utils.isValidEmail(email) && Utils.isValidPassword(password)
+        binding.btnRegister.isEnabled = name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && Utils.isValidEmail(email) && Utils.isValidPassword(password)
     }
 
     private fun buttonRegisterHandler(){

@@ -3,6 +3,7 @@ package com.capstone.foodresq.data.repository
 import com.capstone.foodresq.data.remote.response.LoginFailedResponse
 import com.capstone.foodresq.data.remote.response.LoginResponse
 import com.capstone.foodresq.data.remote.retrofit.ApiService
+import com.capstone.foodresq.data.remote.retrofit.loginBody
 import com.google.gson.Gson
 import retrofit2.HttpException
 import java.io.IOException
@@ -11,7 +12,7 @@ class LoginRepository(private val apiService: ApiService) {
 
     suspend fun login(email: String, password: String): LoginResult {
         try {
-            val response = apiService.login(email, password)
+            val response = apiService.login(loginBody(email,password))
             return LoginResult.Success(response)
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
