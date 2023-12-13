@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import com.capstone.foodresq.ui.main.explore.ExploreFragment
 import com.capstone.foodresq.ui.main.order.OrderFragment
 import com.capstone.foodresq.ui.main.profile.ProfileFragment
 import com.capstone.foodresq.ui.register.RegisterActivity
+import com.capstone.foodresq.utils.Utils.observeOnce
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,9 +31,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         showLoading(true)
-        mainViewModel.getSession().observe(this){
+        mainViewModel.getSession().observeOnce{
             if(it.isLogin){
                 showLoading(false)
+                Log.d("current Token",it.token)
             }else{
                 startActivity(Intent(this,LoginActivity::class.java))
                 finish()
@@ -64,5 +67,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLoading(load : Boolean){
         binding.layoutLoading.progressBar.isVisible = load == true
+        if(load){
+            binding.bottomNavigation.visibility= View.INVISIBLE
+            binding.fragmentContainer.visibility= View.INVISIBLE
+        }else{
+            binding.bottomNavigation.visibility= View.VISIBLE
+            binding.fragmentContainer.visibility= View.VISIBLE
+        }
     }
 }

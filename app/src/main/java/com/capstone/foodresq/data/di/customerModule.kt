@@ -37,7 +37,7 @@ val customerModule= module {
     viewModel { LoginViewModel(get(),get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { MainViewModel(get()) }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(),get()) }
 
 }
 fun provideDataStore(context: Context): DataStore<Preferences> {

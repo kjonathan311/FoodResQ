@@ -3,6 +3,8 @@ package com.capstone.foodresq.utils
 import android.graphics.Bitmap
 import android.text.TextUtils
 import android.util.Patterns
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
@@ -17,6 +19,15 @@ object Utils {
 
     fun isValidPassword(password : String) : Boolean{
         return !TextUtils.isEmpty(password) && password.length >= 8
+    }
+
+    fun <T> LiveData<T>.observeOnce(observer: (T) -> Unit) {
+        observeForever(object : Observer<T> {
+            override fun onChanged(t: T) {
+                observer(t)
+                removeObserver(this)
+            }
+        })
     }
 
     fun generateQrCode(text: String, width: Int, height: Int): Bitmap? {
