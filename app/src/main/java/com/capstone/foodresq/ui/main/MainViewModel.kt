@@ -17,12 +17,4 @@ class MainViewModel(
     fun getSession(): LiveData<UserModel> {
         return userRepository.getSession().asLiveData()
     }
-
-    fun logout(){
-        viewModelScope.launch {
-            loading.value=true
-            userRepository.logout()
-        }
-    }
-
 }

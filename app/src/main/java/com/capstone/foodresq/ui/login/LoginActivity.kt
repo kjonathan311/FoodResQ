@@ -12,9 +12,11 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.capstone.foodresq.R
 import com.capstone.foodresq.data.datastore.UserModel
@@ -47,17 +49,27 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             LoginUser()
         }
+
+
     }
 
     private fun LoginUser(){
-        val checkSessionLogin = MutableLiveData<Boolean>()
         val email=binding.textInputEditEmail.text.toString()
         val password=binding.textInputEditPassword.text.toString()
         loginViewModel.login(email,password)
         loginViewModel.successResult.observe(this){
             if (it!=null){
-                checkSessionLogin.value=true
                 loginViewModel.saveSession(UserModel(it.token.toString()))
+                lifecycleScope.launch {
+                    loginViewModel.getSession().observe(this@LoginActivity){
+                        if(it!=null){
+                            Log.d("check",it.token)
+                            Log.d("check",it.isLogin.toString())
+                            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                            finish()
+                        }
+                    }
+                }
             }
         }
         loginViewModel.errorMessage.observe(this){
@@ -65,19 +77,8 @@ class LoginActivity : AppCompatActivity() {
                 showAlertDialog(this,"error",it)
             }
         }
-        checkSessionLogin.observe(this){
-            lifecycleScope.launch {
-                loginViewModel.getSession().observe(this@LoginActivity){
-                    if(it!=null){
-                        Log.d("check",it.token)
-                        Log.d("check",it.isLogin.toString())
-                        startActivity(Intent(this@LoginActivity,MainActivity::class.java))
-                        finish()
-                    }
-                }
-            }
-        }
     }
+
 
     private fun setButtonLoginEnable(){
         val email = binding.textInputEditEmail.text.toString()

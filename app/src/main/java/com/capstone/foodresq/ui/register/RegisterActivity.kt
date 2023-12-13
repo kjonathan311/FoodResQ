@@ -38,8 +38,8 @@ class RegisterActivity : AppCompatActivity() {
             itemSelected = adapterView.getItemAtPosition(position).toString()
         }
 
-        setButtonRegisterEnabled()
         onTextFieldChanged()
+        setButtonRegisterEnabled()
         setLoginHandler()
         buttonRegisterHandler()
 
