@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Log.d("activity created","main")
         showLoading(true)
         mainViewModel.getSession().observeOnce{
             if(it.isLogin){
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container,ExploreFragment)
+            addToBackStack(null)
             commit()
         }
 
@@ -59,9 +61,11 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
     private fun setCurrentFragment(fragment:Fragment)=
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container,fragment)
+            addToBackStack(null)
             commit()
         }
 

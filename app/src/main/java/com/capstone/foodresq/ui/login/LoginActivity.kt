@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Log.d("activity created","login")
         setUpView()
         setButtonLoginEnable()
         onTextInputChanged()
@@ -54,27 +55,38 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun LoginUser(){
+        val checkLiveData = MutableLiveData<Boolean>()
+        checkLiveData.value=false
         val email=binding.textInputEditEmail.text.toString()
         val password=binding.textInputEditPassword.text.toString()
         loginViewModel.login(email,password)
         loginViewModel.successResult.observe(this){
             if (it!=null){
                 loginViewModel.saveSession(UserModel(it.token.toString()))
-                lifecycleScope.launch {
-                    loginViewModel.getSession().observe(this@LoginActivity){
-                        if(it!=null){
-                            Log.d("check",it.token)
-                            Log.d("check",it.isLogin.toString())
-                            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
-                            finish()
-                        }
-                    }
-                }
+                checkLiveData.value=true
+                showLoading(true)
             }
         }
         loginViewModel.errorMessage.observe(this){
             if (it!=null){
                 showAlertDialog(this,"error",it)
+            }
+        }
+        checkLiveData.observe(this){
+            if(it){
+                lifecycleScope.launch {
+                    showLoading(true)
+                    loginViewModel.getSession().observe(this@LoginActivity){
+                        if(it!=null){
+                            Log.d("check",it.token)
+                            Log.d("check",it.isLogin.toString())
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                }
             }
         }
     }
