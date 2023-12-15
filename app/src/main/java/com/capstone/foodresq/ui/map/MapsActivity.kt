@@ -38,17 +38,17 @@ class MapsActivity : AppCompatActivity() {
         })
     }
     fun setData(){
-        val exampleFoodItemList = listOf(
-            FoodItem(1),
-            FoodItem(2),
-            FoodItem(3),
-            FoodItem(4),
-        )
-        val FoodItemAdapter= FoodItemAdapter(exampleFoodItemList){
-            startActivity(Intent(this, DetailActivity::class.java))
-        }
-        binding.rvMap.layoutManager= GridLayoutManager(this,2)
-        binding.rvMap.addItemDecoration(GridSpacingItemDecoration(2,16,false))
-        binding.rvMap.adapter=FoodItemAdapter
+//        val exampleFoodItemList = listOf(
+//            FoodItem(1),
+//            FoodItem(2),
+//            FoodItem(3),
+//            FoodItem(4),
+//        )
+//        val FoodItemAdapter= FoodItemAdapter(exampleFoodItemList){
+//            startActivity(Intent(this, DetailActivity::class.java))
+//        }
+//        binding.rvMap.layoutManager= GridLayoutManager(this,2)
+//        binding.rvMap.addItemDecoration(GridSpacingItemDecoration(2,16,false))
+//        binding.rvMap.adapter=FoodItemAdapter
     }
 }

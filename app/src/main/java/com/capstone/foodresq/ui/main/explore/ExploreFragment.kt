@@ -16,12 +16,14 @@ import com.capstone.foodresq.databinding.FragmentExploreBinding
 import com.capstone.foodresq.ui.detail.DetailActivity
 import com.capstone.foodresq.ui.list.ListActivity
 import com.capstone.foodresq.utils.GridSpacingItemDecoration
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ExploreFragment : Fragment() {
 
     lateinit var binding:FragmentExploreBinding
     private lateinit var search:String
+    private val exploreViewModel:ExploreViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +35,9 @@ class ExploreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        exploreViewModel.loading.observe(viewLifecycleOwner) { showLoading(it) }
+
 
         binding.exploreSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
@@ -53,12 +58,6 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setData(){
-        val exampleFoodItemList = listOf(
-            FoodItem(1),
-            FoodItem(2),
-            FoodItem(3),
-            FoodItem(4),
-        )
 
         val exampleSelectionList = listOf(
             Selection(1),
@@ -68,21 +67,29 @@ class ExploreFragment : Fragment() {
             Selection(5),
             Selection(6),
         )
-
-        val FoodItemAdapter=FoodItemAdapter(exampleFoodItemList){
-            startActivity(Intent(requireActivity(),DetailActivity::class.java))
+        exploreViewModel.getAllFoods()
+        exploreViewModel.allFoodsData.observe(viewLifecycleOwner){
+            if(it!=null){
+                val FoodItemAdapter=FoodItemAdapter(it){
+                    startActivity(Intent(requireActivity(),DetailActivity::class.java))
+                }
+                binding.rvFoodRecommendation.layoutManager=GridLayoutManager(requireActivity(),2)
+                binding.rvFoodRecommendation.addItemDecoration(GridSpacingItemDecoration(2,16,false))
+                binding.rvFoodRecommendation.adapter=FoodItemAdapter
+            }
         }
-        binding.rvFoodRecommendation.layoutManager=GridLayoutManager(requireActivity(),2)
-        binding.rvFoodRecommendation.addItemDecoration(GridSpacingItemDecoration(2,16,false))
-        binding.rvFoodRecommendation.adapter=FoodItemAdapter
-
-        binding.rvPopularFoods.layoutManager=GridLayoutManager(requireActivity(),2)
-        binding.rvPopularFoods.addItemDecoration(GridSpacingItemDecoration(2,16,false))
-        binding.rvPopularFoods.adapter=FoodItemAdapter
-
+//        binding.rvPopularFoods.layoutManager=GridLayoutManager(requireActivity(),2)
+//        binding.rvPopularFoods.addItemDecoration(GridSpacingItemDecoration(2,16,false))
+//        binding.rvPopularFoods.adapter=FoodItemAdapte
 
         val SelectionAdapter=SelectionAdapter(exampleSelectionList)
         binding.rvSelections.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvSelections.adapter=SelectionAdapter
+    }
+
+
+    private fun showLoading(load: Boolean) {
+        binding.progressExplore.visibility = if (load) View.VISIBLE else View.GONE
+        binding.rvFoodRecommendation.visibility = if (load) View.INVISIBLE else View.VISIBLE
     }
 }

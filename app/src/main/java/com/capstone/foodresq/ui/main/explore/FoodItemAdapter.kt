@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.capstone.foodresq.R
 import com.capstone.foodresq.data.classes.FoodItem
 import com.google.android.material.imageview.ShapeableImageView
@@ -44,7 +46,14 @@ class FoodItemAdapter(
         private val available: TextView =itemView.findViewById(R.id.tv_food_item_available)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_food_item)
         fun bind(item: FoodItem){
-            imageView.setImageResource(R.drawable.food_item_examp)
+            title.text = item.name
+            price.text = item.discount_price.toString()
+            available.text = item.quantity.toString() + " available"
+            // Use Glide to load the image from the URI or resource ID
+            Glide.with(itemView.context)
+                .load(item.image)
+                .transform(CenterCrop())
+                .into(imageView)
             itemView.setOnClickListener {
                 clickListener(item)
             }
@@ -52,15 +61,4 @@ class FoodItemAdapter(
     }
 
 
-    companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FoodItem>() {
-            override fun areItemsTheSame(oldItem: FoodItem, newItem: FoodItem): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(oldItem: FoodItem, newItem: FoodItem): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
 }

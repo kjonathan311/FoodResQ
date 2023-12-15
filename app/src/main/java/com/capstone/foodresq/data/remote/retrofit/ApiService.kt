@@ -1,5 +1,6 @@
 package com.capstone.foodresq.data.remote.retrofit
 
+import com.capstone.foodresq.data.remote.response.FoodsResponse
 import com.capstone.foodresq.data.remote.response.LoginResponse
 import com.capstone.foodresq.data.remote.response.ProfileResponse
 import com.capstone.foodresq.data.remote.response.RegisterResponse
@@ -20,6 +21,9 @@ interface ApiService {
 
     @GET("profile/me")
     suspend fun profile():ProfileResponse
+
+    @GET("foods")
+    suspend fun getAllfoods():FoodsResponse
 
 }
 data class registerBody(

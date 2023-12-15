@@ -30,17 +30,17 @@ class ListActivity : AppCompatActivity() {
         })
     }
     fun setData(){
-        val exampleFoodItemList = listOf(
-            FoodItem(1),
-            FoodItem(2),
-            FoodItem(3),
-            FoodItem(4),
-        )
-        val FoodItemAdapter= FoodItemAdapter(exampleFoodItemList){
-            startActivity(Intent(this,DetailActivity::class.java))
-        }
-        binding.rvList.layoutManager= GridLayoutManager(this,2)
-        binding.rvList.addItemDecoration(GridSpacingItemDecoration(2,16,false))
-        binding.rvList.adapter=FoodItemAdapter
+//        val exampleFoodItemList = listOf(
+//            FoodItem(1),
+//            FoodItem(2),
+//            FoodItem(3),
+//            FoodItem(4),
+//        )
+//        val FoodItemAdapter= FoodItemAdapter(exampleFoodItemList){
+//            startActivity(Intent(this,DetailActivity::class.java))
+//        }
+//        binding.rvList.layoutManager= GridLayoutManager(this,2)
+//        binding.rvList.addItemDecoration(GridSpacingItemDecoration(2,16,false))
+//        binding.rvList.adapter=FoodItemAdapter
     }
 }
