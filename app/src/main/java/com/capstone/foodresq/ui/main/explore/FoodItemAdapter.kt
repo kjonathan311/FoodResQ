@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.capstone.foodresq.R
 import com.capstone.foodresq.data.classes.FoodItem
+import com.capstone.foodresq.utils.Utils
 import com.google.android.material.imageview.ShapeableImageView
 
 class FoodItemAdapter(
@@ -47,7 +48,7 @@ class FoodItemAdapter(
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_food_item)
         fun bind(item: FoodItem){
             title.text = item.name
-            price.text = item.discount_price.toString()
+            price.text = Utils.formatPrice(item.discount_price.toString())
             available.text = item.quantity.toString() + " available"
             // Use Glide to load the image from the URI or resource ID
             Glide.with(itemView.context)

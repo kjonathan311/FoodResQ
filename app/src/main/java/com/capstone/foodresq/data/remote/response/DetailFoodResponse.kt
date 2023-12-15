@@ -8,5 +8,5 @@ data class DetailFoodResponse(
     val message:String?=null,
 
     @field:SerializedName("data")
-    val data:FoodItem?=null
+    val data:List<FoodItem>?=null
 )

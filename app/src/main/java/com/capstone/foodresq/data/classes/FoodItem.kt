@@ -1,6 +1,7 @@
 package com.capstone.foodresq.data.classes
 
 data class FoodItem (
+    val id:String,
     val name:String,
     val description:String,
     val price:Int,

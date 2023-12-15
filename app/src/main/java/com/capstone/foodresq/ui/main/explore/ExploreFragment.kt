@@ -71,7 +71,7 @@ class ExploreFragment : Fragment() {
         exploreViewModel.allFoodsData.observe(viewLifecycleOwner){
             if(it!=null){
                 val FoodItemAdapter=FoodItemAdapter(it){
-                    startActivity(Intent(requireActivity(),DetailActivity::class.java))
+                    startActivity(Intent(requireActivity(),DetailActivity::class.java).putExtra("id",it.id))
                 }
                 binding.rvFoodRecommendation.layoutManager=GridLayoutManager(requireActivity(),2)
                 binding.rvFoodRecommendation.addItemDecoration(GridSpacingItemDecoration(2,16,false))
