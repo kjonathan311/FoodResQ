@@ -38,58 +38,54 @@ class ExploreFragment : Fragment() {
 
         exploreViewModel.loading.observe(viewLifecycleOwner) { showLoading(it) }
 
+        search()
+        setData()
+    }
 
+    private fun search(){
         binding.exploreSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
-                // Open the search activity when the Enter key is pressed
                 val intent = Intent(requireActivity(), ListActivity::class.java)
-                intent.putExtra("search",binding.exploreSearch.text)
+                intent.putExtra("query",binding.exploreSearch.text.toString())
                 startActivity(intent)
                 return@setOnEditorActionListener true
             }
             false
         }
+        binding.exploreSearch.setOnKeyListener { _, keyCode, event ->
+            if ((event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                val intent = Intent(requireActivity(), ListActivity::class.java)
+                intent.putExtra("query",binding.exploreSearch.text.toString())
+                startActivity(intent)
+                return@setOnKeyListener true
+            }
+            false
+        }
         binding.layoutSearch.setStartIconOnClickListener {
             val intent = Intent(requireActivity(), ListActivity::class.java)
-            intent.putExtra("search",binding.exploreSearch.text)
+            intent.putExtra("query",binding.exploreSearch.text.toString())
             startActivity(intent)
         }
-        setData()
     }
 
     private fun setData(){
-
-        val exampleSelectionList = listOf(
-            Selection(1),
-            Selection(2),
-            Selection(3),
-            Selection(4),
-            Selection(5),
-            Selection(6),
-        )
         exploreViewModel.getAllFoods()
         exploreViewModel.allFoodsData.observe(viewLifecycleOwner){
             if(it!=null){
                 val FoodItemAdapter=FoodItemAdapter(it){
                     startActivity(Intent(requireActivity(),DetailActivity::class.java).putExtra("id",it.id))
                 }
-                binding.rvFoodRecommendation.layoutManager=GridLayoutManager(requireActivity(),2)
-                binding.rvFoodRecommendation.addItemDecoration(GridSpacingItemDecoration(2,16,false))
-                binding.rvFoodRecommendation.adapter=FoodItemAdapter
+                binding.rvSelections.layoutManager=GridLayoutManager(requireActivity(),2)
+                binding.rvSelections.addItemDecoration(GridSpacingItemDecoration(2,16,false))
+                binding.rvSelections.adapter=FoodItemAdapter
             }
         }
-//        binding.rvPopularFoods.layoutManager=GridLayoutManager(requireActivity(),2)
-//        binding.rvPopularFoods.addItemDecoration(GridSpacingItemDecoration(2,16,false))
-//        binding.rvPopularFoods.adapter=FoodItemAdapte
-
-        val SelectionAdapter=SelectionAdapter(exampleSelectionList)
-        binding.rvSelections.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvSelections.adapter=SelectionAdapter
     }
+
 
 
     private fun showLoading(load: Boolean) {
         binding.progressExplore.visibility = if (load) View.VISIBLE else View.GONE
-        binding.rvFoodRecommendation.visibility = if (load) View.INVISIBLE else View.VISIBLE
+        binding.rvSelections.visibility = if (load) View.INVISIBLE else View.VISIBLE
     }
 }

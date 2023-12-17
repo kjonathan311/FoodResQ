@@ -17,7 +17,6 @@ class FoodItemAdapter(
     private val FoodItemList: List<FoodItem>,
     private val clickListener: (FoodItem) -> Unit
 ): RecyclerView.Adapter<FoodItemAdapter.FoodItemViewHolder>() {
-//    ) : PagedListAdapter<FoodItem, FoodItemAdapter.FoodItemViewHolder>(DIFF_CALLBACK){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodItemViewHolder {
         val inflater= LayoutInflater.from(parent.context)
@@ -50,7 +49,6 @@ class FoodItemAdapter(
             title.text = item.name
             price.text = Utils.formatPrice(item.discount_price.toString())
             available.text = item.quantity.toString() + " available"
-            // Use Glide to load the image from the URI or resource ID
             Glide.with(itemView.context)
                 .load(item.image)
                 .transform(CenterCrop())
@@ -60,6 +58,5 @@ class FoodItemAdapter(
             }
         }
     }
-
 
 }

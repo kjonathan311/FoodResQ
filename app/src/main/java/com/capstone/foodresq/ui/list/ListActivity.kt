@@ -3,6 +3,7 @@ package com.capstone.foodresq.ui.list
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstone.foodresq.R
 import com.capstone.foodresq.data.classes.FoodItem
@@ -10,17 +11,30 @@ import com.capstone.foodresq.databinding.ActivityListBinding
 import com.capstone.foodresq.ui.detail.DetailActivity
 import com.capstone.foodresq.ui.main.explore.FoodItemAdapter
 import com.capstone.foodresq.utils.GridSpacingItemDecoration
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityListBinding
+    private val listViewModel:ListViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        listViewModel.loading.observe(this){
+            showLoading(it)
+        }
+
+        val foodName=intent.getStringExtra("query")
+        val foodList: List<FoodItem>? = intent.getParcelableArrayListExtra("list")
+        if(foodName!=null){
+            setData(foodName)
+        }else if(foodList!=null){
+            setDataList(foodList)
+        }
         setMenuIcon()
-        setData()
     }
 
     fun setMenuIcon(){
@@ -29,18 +43,35 @@ class ListActivity : AppCompatActivity() {
             finish()
         })
     }
-    fun setData(){
-//        val exampleFoodItemList = listOf(
-//            FoodItem(1),
-//            FoodItem(2),
-//            FoodItem(3),
-//            FoodItem(4),
-//        )
-//        val FoodItemAdapter= FoodItemAdapter(exampleFoodItemList){
-//            startActivity(Intent(this,DetailActivity::class.java))
-//        }
-//        binding.rvList.layoutManager= GridLayoutManager(this,2)
-//        binding.rvList.addItemDecoration(GridSpacingItemDecoration(2,16,false))
-//        binding.rvList.adapter=FoodItemAdapter
+    fun setData(foodName:String){
+        listViewModel.getFoodsByQuery(foodName)
+        listViewModel.queryFoodsData.observe(this){
+            if(it!=null){
+                if (it.isNotEmpty()){
+                    val ListAdapter=FoodItemAdapter(it){
+                        startActivity(Intent(this,DetailActivity::class.java).putExtra("id",it.id))
+                    }
+                    binding.rvList.layoutManager=GridLayoutManager(this,2)
+                    binding.rvList.addItemDecoration(GridSpacingItemDecoration(2,16,false))
+                    binding.rvList.adapter=ListAdapter
+                }else{
+                    binding.tvNotFound.visibility = View.VISIBLE
+                    binding.rvList.visibility = View.GONE
+                }
+            }
+        }
+    }
+    fun setDataList(foodList:List<FoodItem>){
+        val FoodItemAdapter=FoodItemAdapter(foodList){
+            startActivity(Intent(this,DetailActivity::class.java).putExtra("id",it.id))
+        }
+        binding.rvList.layoutManager=GridLayoutManager(this,2)
+        binding.rvList.addItemDecoration(GridSpacingItemDecoration(2,16,false))
+        binding.rvList.adapter=FoodItemAdapter
+    }
+
+    fun showLoading(load:Boolean){
+        binding.progressList.visibility = if (load) View.VISIBLE else View.GONE
+
     }
 }

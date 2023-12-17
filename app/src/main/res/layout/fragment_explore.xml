@@ -22,6 +22,9 @@
             android:id="@+id/explore_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:imeOptions="actionSearch"
+            android:imeActionLabel="Search"
+            android:singleLine="true"
             android:hint="Search" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,6 +57,15 @@
                     android:text="Food Selections"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_seemore_foodselection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="See more"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/color_palette_5" />
 
             </LinearLayout>
 
@@ -139,6 +151,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminateTint="@color/color_palette_5"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

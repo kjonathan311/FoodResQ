@@ -1,24 +1,24 @@
-package com.capstone.foodresq.ui.main.explore
+package com.capstone.foodresq.ui.list
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.foodresq.data.classes.FoodItem
-import com.capstone.foodresq.data.remote.response.ProfileData
 import com.capstone.foodresq.data.repository.ExploreRepository
+import com.capstone.foodresq.data.repository.ListRepository
 import kotlinx.coroutines.launch
 
-class ExploreViewModel(
-    private val exploreRepository: ExploreRepository
+class ListViewModel(
+    private val listRepository: ListRepository
 ): ViewModel() {
     val loading = MutableLiveData<Boolean>().apply { value = true }
-    val allFoodsData = MutableLiveData<List<FoodItem>?>()
-    fun getAllFoods() {
+    val queryFoodsData = MutableLiveData<List<FoodItem>?>()
+    fun getFoodsByQuery(foodName:String) {
         viewModelScope.launch {
             try {
                 loading.value = true
-                val foods = exploreRepository.getAllFoods()
-                allFoodsData.value = foods
+                val foods = listRepository.getFoodsByQuery(foodName)
+                queryFoodsData.value = foods
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
@@ -26,5 +26,4 @@ class ExploreViewModel(
             }
         }
     }
-
 }

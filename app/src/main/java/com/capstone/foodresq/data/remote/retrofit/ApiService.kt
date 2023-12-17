@@ -11,6 +11,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface ApiService {
@@ -29,6 +30,9 @@ interface ApiService {
 
     @GET("foods/{foodId}")
     suspend fun getFoodDetail(@Path("foodId") foodId: String): DetailFoodResponse
+
+    @GET("foods")
+    suspend fun getFoodByQuery(@Query("name") foodName: String): FoodsResponse
 
 }
 data class registerBody(

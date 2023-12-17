@@ -8,11 +8,13 @@ import com.capstone.foodresq.data.datastore.UserPreference
 import com.capstone.foodresq.data.repository.DetailRepository
 import com.capstone.foodresq.data.repository.ExploreRepository
 import com.capstone.foodresq.data.repository.HistoryOrderRepository
+import com.capstone.foodresq.data.repository.ListRepository
 import com.capstone.foodresq.data.repository.LoginRepository
 import com.capstone.foodresq.data.repository.ProfileRepository
 import com.capstone.foodresq.data.repository.RegisterRepository
 import com.capstone.foodresq.data.repository.UserRepository
 import com.capstone.foodresq.ui.detail.DetailViewModel
+import com.capstone.foodresq.ui.list.ListViewModel
 import com.capstone.foodresq.ui.login.LoginViewModel
 import com.capstone.foodresq.ui.main.MainViewModel
 import com.capstone.foodresq.ui.main.explore.ExploreViewModel
@@ -36,6 +38,7 @@ val customerModule= module {
     single { RegisterRepository(get()) }
     single { UserRepository(get()) }
     single { DetailRepository(get()) }
+    single { ListRepository(get()) }
 
     //viewModels
     viewModel { LoginViewModel(get(),get()) }
@@ -44,6 +47,7 @@ val customerModule= module {
     viewModel { ProfileViewModel(get(),get()) }
     viewModel { ExploreViewModel(get()) }
     viewModel { DetailViewModel(get()) }
+    viewModel { ListViewModel(get()) }
 
 }
 fun provideDataStore(context: Context): DataStore<Preferences> {
