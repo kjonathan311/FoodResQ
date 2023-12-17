@@ -11,11 +11,16 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.capstone.foodresq.R
 import com.capstone.foodresq.databinding.ActivityRegisterBinding
 import com.capstone.foodresq.ui.login.LoginActivity
 import com.capstone.foodresq.utils.Utils
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -99,18 +104,34 @@ class RegisterActivity : AppCompatActivity() {
                 registerViewModel.register(name,email,password)
                 registerViewModel.errorMessage.observe(this){
                     if(it!=null){
-                        showAlertDialog("error",it)
+                        lifecycleScope.launch {
+                            suspendCoroutine<Unit> { continuation ->
+                                showAlertDialog("Error", it) {
+                                    continuation.resume(Unit)
+                                }
+                            }
+                        }
                     }
                 }
                 registerViewModel.successMessage.observe(this){
                     if(it!=null){
-                        showAlertDialog("Success","Your new account already set. Let's get in!")
-                        setLoginHandler()
+                        lifecycleScope.launch {
+                            suspendCoroutine<Unit> { continuation ->
+                                showAlertDialog("Success", "Your new account is already set. Let's get in!") {
+                                    continuation.resume(Unit)
+                                }
+                            }
+
+                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
                     }
                 }
             }
         }
     }
+
 
     private fun setLoginHandler() {
         binding.txtNavigateToLogin.setOnClickListener {
@@ -120,13 +141,14 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun showAlertDialog(title : String,message : String){
+    private fun showAlertDialog(title: String, message: String, callback: () -> Unit) {
         AlertDialog.Builder(this)
-            .setMessage(message)
             .setTitle(title)
-            .setPositiveButton("OK"){dialog, _ ->
-                dialog.dismiss()
+            .setMessage(message)
+            .setPositiveButton("OK") { _, _ ->
+                callback.invoke()
             }
+            .setCancelable(false)
             .show()
     }
 

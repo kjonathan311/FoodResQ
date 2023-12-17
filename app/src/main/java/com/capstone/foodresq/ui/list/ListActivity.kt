@@ -23,9 +23,6 @@ class ListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        listViewModel.loading.observe(this){
-            showLoading(it)
-        }
 
         val foodName=intent.getStringExtra("query")
         val foodList: List<FoodItem>? = intent.getParcelableArrayListExtra("list")
@@ -44,6 +41,10 @@ class ListActivity : AppCompatActivity() {
         })
     }
     fun setData(foodName:String){
+        listViewModel.loading.observe(this){
+            showLoading(it)
+        }
+
         listViewModel.getFoodsByQuery(foodName)
         listViewModel.queryFoodsData.observe(this){
             if(it!=null){
@@ -62,6 +63,7 @@ class ListActivity : AppCompatActivity() {
         }
     }
     fun setDataList(foodList:List<FoodItem>){
+        showLoading(false)
         val FoodItemAdapter=FoodItemAdapter(foodList){
             startActivity(Intent(this,DetailActivity::class.java).putExtra("id",it.id))
         }

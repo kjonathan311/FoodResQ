@@ -51,6 +51,7 @@ class DetailActivity : AppCompatActivity() {
         detailViewModel.foodData.observe(this){
             if(it!=null){
                 findViewById<TextView>(R.id.product_name).text = it.name
+                findViewById<TextView>(R.id.tv_availability).text = it.quantity.toString()+" available"
                 findViewById<TextView>(R.id.price_before_discount).paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
                 findViewById<TextView>(R.id.price_before_discount).text = Utils.formatPrice(it.price.toString())
                 findViewById<TextView>(R.id.price_after_discount).text = Utils.formatPrice(it.discount_price.toString())

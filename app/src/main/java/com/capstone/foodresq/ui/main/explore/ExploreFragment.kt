@@ -70,14 +70,20 @@ class ExploreFragment : Fragment() {
 
     private fun setData(){
         exploreViewModel.getAllFoods()
-        exploreViewModel.allFoodsData.observe(viewLifecycleOwner){
-            if(it!=null){
-                val FoodItemAdapter=FoodItemAdapter(it){
+        exploreViewModel.allFoodsData.observe(viewLifecycleOwner){list->
+            if(list!=null){
+                val FoodItemAdapter=FoodItemAdapter(list){
                     startActivity(Intent(requireActivity(),DetailActivity::class.java).putExtra("id",it.id))
                 }
                 binding.rvSelections.layoutManager=GridLayoutManager(requireActivity(),2)
                 binding.rvSelections.addItemDecoration(GridSpacingItemDecoration(2,16,false))
                 binding.rvSelections.adapter=FoodItemAdapter
+
+                binding.tvSeemoreFoodselection.setOnClickListener {view->
+                    val intent = Intent(requireActivity(), ListActivity::class.java)
+                    intent.putParcelableArrayListExtra("list",ArrayList(list))//list is list<FoodItem>
+                    startActivity(intent)
+                }
             }
         }
     }
