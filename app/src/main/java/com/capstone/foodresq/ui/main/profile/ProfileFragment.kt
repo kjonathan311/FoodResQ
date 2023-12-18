@@ -20,6 +20,7 @@ import com.capstone.foodresq.databinding.FragmentProfileBinding
 import com.capstone.foodresq.ui.login.LoginActivity
 import com.capstone.foodresq.ui.main.MainViewModel
 import com.capstone.foodresq.ui.subscription.SubscriptionActivity
+import com.capstone.foodresq.utils.Utils.observeOnce
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,13 +44,22 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.loading.observe(viewLifecycleOwner) { showLoading(it) }
 
-        profileViewModel.profile().observe(viewLifecycleOwner) { profileData ->
+        profileViewModel.profile().observeOnce { profileData ->
             profileData?.let {
                 updateUI(it)
             }
         }
 
         setSettingData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        profileViewModel.profile().observeOnce { profileData ->
+            profileData?.let {
+                updateUI(it)
+            }
+        }
     }
 
     private fun setSettingData() {
@@ -94,6 +104,9 @@ class ProfileFragment : Fragment() {
         binding.tvProfileType.text = profileData.membership_type
         val backgroundTint1 = ContextCompat.getColorStateList(requireContext(), R.color.color_palette_5)
         val backgroundTint2 = ContextCompat.getColorStateList(requireContext(), R.color.color_palette_4)
+        binding.btnSubscription.setIcon("ic_subscription")
+        binding.btnSettings.setIcon("ic_settings")
+        binding.btnSettings.setTitle("Settings")
         if (profileData.membership_type != "standard") {
             binding.tvProfileType.backgroundTintList = backgroundTint1
             binding.tvProfileType.backgroundTintMode = PorterDuff.Mode.SRC_IN

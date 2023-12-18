@@ -55,9 +55,6 @@ class DetailActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.price_before_discount).paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
                 findViewById<TextView>(R.id.price_before_discount).text = Utils.formatPrice(it.price.toString())
                 findViewById<TextView>(R.id.price_after_discount).text = Utils.formatPrice(it.discount_price.toString())
-
-
-
                 findViewById<TextView>(R.id.product_content).text = it.description
 
                 val imageView = findViewById<ImageView>(R.id.img_product)
@@ -67,5 +64,8 @@ class DetailActivity : AppCompatActivity() {
                     .into(imageView)
             }
         }
+
     }
+
+
 }

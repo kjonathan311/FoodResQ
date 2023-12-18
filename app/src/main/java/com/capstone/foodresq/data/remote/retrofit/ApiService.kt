@@ -2,9 +2,11 @@ package com.capstone.foodresq.data.remote.retrofit
 
 import com.capstone.foodresq.data.remote.response.DetailFoodResponse
 import com.capstone.foodresq.data.remote.response.FoodsResponse
+import com.capstone.foodresq.data.remote.response.GetSubscriptionResponse
 import com.capstone.foodresq.data.remote.response.LoginResponse
 import com.capstone.foodresq.data.remote.response.ProfileResponse
 import com.capstone.foodresq.data.remote.response.RegisterResponse
+import com.capstone.foodresq.data.remote.response.SubscriptionResponse
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -33,6 +35,12 @@ interface ApiService {
 
     @GET("foods")
     suspend fun getFoodByQuery(@Query("name") foodName: String): FoodsResponse
+
+    @POST("subscribe")
+    suspend fun subscribe():SubscriptionResponse
+
+    @GET("subscription")
+    suspend fun getSubscription():GetSubscriptionResponse
 
 }
 data class registerBody(

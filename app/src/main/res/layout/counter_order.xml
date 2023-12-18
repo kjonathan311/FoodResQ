@@ -45,15 +45,16 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_counter"/>
 
         <Button
+            android:id="@+id/btn_detail_order"
             android:layout_width="240dp"
             android:layout_height="60dp"
-            app:layout_constraintStart_toEndOf="@id/btn_plus"
             android:layout_marginStart="10dp"
             android:text="@string/order"
             android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toEndOf="@id/btn_plus"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     

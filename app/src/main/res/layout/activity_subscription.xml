@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.subscription.SubscriptionActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_sub"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:indeterminateTint="@color/color_palette_5"
+        app:layout_constraintBottom_toTopOf="@+id/button_subscribe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout3"
         android:layout_width="match_parent"
@@ -44,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout3" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_subscribe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -57,6 +69,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="400dp"
         android:layout_marginStart="16dp"

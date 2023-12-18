@@ -10,7 +10,7 @@ class DetailRepository(private val apiService: ApiService) {
         try {
             val response=apiService.getFoodDetail(id)
             return response.data?.first()
-        }catch (e:HttpException){
+        }catch  (e:HttpException){
             return null
         }
     }
