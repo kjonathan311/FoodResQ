@@ -34,7 +34,7 @@ val apiModule = module {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://resq-seven.vercel.app/api/v1/")
+            .baseUrl("https://foodresq-cwnr6exv2a-et.a.run.app/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
