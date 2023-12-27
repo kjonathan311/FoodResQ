@@ -43,10 +43,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     //dummyData
     fun setData(){
         val FoodItemAdapter = MapFoodAdapter(dummyData.dummyFood){
-            startActivity(Intent(this, DetailActivity::class.java).putExtra("id", it.id))
+
         }
 
-        binding.rvMap.layoutManager = LinearLayoutManager(this)
+        binding.rvMap.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvMap.adapter = FoodItemAdapter
 //        val exampleFoodItemList = listOf(
 //            FoodItem(1),

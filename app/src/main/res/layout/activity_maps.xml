@@ -24,17 +24,18 @@
             android:theme="?attr/actionBarTheme" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.gms.maps.MapView
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:contentDescription="@string/restaurant_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_marginTop="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout4">
 
-    </com.google.android.gms.maps.MapView>
+    </androidx.fragment.app.FragmentContainerView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -120,19 +121,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_map_title"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_map"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="32dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_maps_address"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_maps_address">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="32dp"
+                android:scrollbars="horizontal" />
+
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
