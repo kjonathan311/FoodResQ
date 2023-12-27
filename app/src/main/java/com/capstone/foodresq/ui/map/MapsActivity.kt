@@ -3,16 +3,20 @@ package com.capstone.foodresq.ui.map
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.classes.FoodItem
+import com.capstone.foodresq.data.dummy.dummyData
 import com.capstone.foodresq.databinding.ActivityMapsBinding
 import com.capstone.foodresq.ui.detail.DetailActivity
-import com.capstone.foodresq.ui.main.explore.FoodItemAdapter
-import com.capstone.foodresq.utils.GridSpacingItemDecoration
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsActivity : AppCompatActivity() {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    private lateinit var mMap: GoogleMap
     lateinit var binding:ActivityMapsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,11 +27,9 @@ class MapsActivity : AppCompatActivity() {
         setMenuIcon()
         setData()
 
-        val MapFragment=MapsFragment()
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment_map_container, MapFragment)
-            commit()
-        }
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
     }
 
@@ -37,7 +39,15 @@ class MapsActivity : AppCompatActivity() {
             finish()
         })
     }
+
+    //dummyData
     fun setData(){
+        val FoodItemAdapter = MapFoodAdapter(dummyData.dummyFood){
+            startActivity(Intent(this, DetailActivity::class.java).putExtra("id", it.id))
+        }
+
+        binding.rvMap.layoutManager = LinearLayoutManager(this)
+        binding.rvMap.adapter = FoodItemAdapter
 //        val exampleFoodItemList = listOf(
 //            FoodItem(1),
 //            FoodItem(2),
@@ -50,5 +60,24 @@ class MapsActivity : AppCompatActivity() {
 //        binding.rvMap.layoutManager= GridLayoutManager(this,2)
 //        binding.rvMap.addItemDecoration(GridSpacingItemDecoration(2,16,false))
 //        binding.rvMap.adapter=FoodItemAdapter
+    }
+
+    //dummyData
+    override fun onMapReady(map: GoogleMap) {
+        mMap = map
+
+        //attribute map control
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.uiSettings.isIndoorLevelPickerEnabled = true
+        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isMapToolbarEnabled = true
+
+        val latLng = LatLng(-6.227974587871831, 107.00071847935932)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(latLng)
+                .title("Gourmets Eats Summarecon")
+                .snippet("Jl. Boulevard Selatan Mall Summarecon Lt.2")
+        )
     }
 }

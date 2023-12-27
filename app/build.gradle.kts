@@ -30,6 +30,8 @@ android {
     buildTypes {
         debug{
             resValue("string","google_maps_api_key","AIzaSyByunX04TU2K2KNxS4WyWZx3kBtRlCIIKQ")
+            val baseUrl = "\"https://foodresq-cwnr6exv2a-et.a.run.app/api/v1/\""
+            buildConfigField("String","BASE_URL", baseUrl)
         }
         release {
             isMinifyEnabled = false

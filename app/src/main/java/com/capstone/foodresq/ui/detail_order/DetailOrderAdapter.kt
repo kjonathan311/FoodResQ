@@ -6,11 +6,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.classes.FoodItemOrder
+import com.capstone.foodresq.data.classes.FoodItem
+import com.capstone.foodresq.data.remote.response.OrderDetail
 
 class DetailOrderAdapter(
-    private val foodOrderList: List<FoodItemOrder>,
+    private val foodOrderList: List<OrderDetail>,
+    private val detailFood : FoodItem
     ): RecyclerView.Adapter<DetailOrderAdapter.DetailOrderViewHolder>() {
 //    ) : PagedListAdapter<Order, OrderAdapter.OrderViewHolder>(DIFF_CALLBACK){
 
@@ -22,7 +26,7 @@ class DetailOrderAdapter(
 
     override fun onBindViewHolder(holder: DetailOrderViewHolder, position: Int) {
         val foodOrder = foodOrderList.get(position)
-        holder.bind(foodOrder)
+        holder.bind(foodOrder, detailFood)
     }
 
     override fun getItemCount(): Int {
@@ -35,8 +39,14 @@ class DetailOrderAdapter(
         private val picture: ImageView = itemView.findViewById(R.id.iv_detail_order)
         private val quantity: TextView = itemView.findViewById(R.id.tv_detail_quantity)
 
-        fun bind(item: FoodItemOrder) {
-            picture.setImageResource(R.drawable.food_item_examp)
+        fun bind(item: OrderDetail, foodDetail : FoodItem) {
+            Glide.with(itemView)
+                .load(foodDetail.image)
+                .transform(CenterCrop())
+                .into(picture)
+
+            title.text = foodDetail.name
+            quantity.text = itemView.context.getString(R.string.quantityDetail, item.quantity)
         }
     }
 }

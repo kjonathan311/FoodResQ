@@ -14,4 +14,22 @@ class ExploreRepository(private val apiService: ApiService) {
             return null
         }
     }
+
+    suspend fun getFoodRecommendation():List<FoodItem>?{
+        try {
+            val response=apiService.getFoodRecommendation()
+            return response.data
+        } catch (e: HttpException){
+            return null
+        }
+    }
+
+    suspend fun getFoodPopular():List<FoodItem>?{
+        try {
+            val response=apiService.getFoodPopular()
+            return response.data
+        } catch (e: HttpException){
+            return null
+        }
+    }
 }

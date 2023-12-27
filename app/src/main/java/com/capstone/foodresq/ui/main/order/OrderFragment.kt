@@ -34,9 +34,6 @@ class OrderFragment : Fragment() {
                 else -> ""
             }
         }.attach()
-
-
-
     }
 
 }

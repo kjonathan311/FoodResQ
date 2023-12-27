@@ -8,14 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.classes.History
 import com.capstone.foodresq.data.classes.Order
 import com.google.android.material.imageview.ShapeableImageView
 
 
 class HistoryAdapter(
-    private val historyList: List<History>,
-    private val clickListener: (History) -> Unit
+    private val historyList: List<Order>,
+    private val clickListener: (Order) -> Unit
 ): RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 //    ) : PagedListAdapter<Order, OrderAdapter.OrderViewHolder>(DIFF_CALLBACK){
 
@@ -41,7 +40,7 @@ class HistoryAdapter(
         private val time:TextView=itemView.findViewById(R.id.tv_history_success)
         private val btnRate:ImageButton=itemView.findViewById(R.id.btn_rate)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_history)
-        fun bind(history: History){
+        fun bind(history : Order){
             imageView.setImageResource(R.drawable.exampl_burg)
             btnRate.setOnClickListener {
                 clickListener(history)

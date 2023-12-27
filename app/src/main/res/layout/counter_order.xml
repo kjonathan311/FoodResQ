@@ -45,7 +45,7 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_counter"/>
 
         <Button
-            android:id="@+id/btn_detail_order"
+            android:id="@+id/btn_order"
             android:layout_width="240dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"

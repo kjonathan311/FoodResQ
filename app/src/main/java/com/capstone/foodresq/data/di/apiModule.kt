@@ -1,5 +1,6 @@
 package com.capstone.foodresq.data.di
 
+import com.capstone.foodresq.BuildConfig
 import com.capstone.foodresq.data.datastore.UserPreference
 import com.capstone.foodresq.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.first
@@ -34,7 +35,7 @@ val apiModule = module {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://foodresq-cwnr6exv2a-et.a.run.app/api/v1/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

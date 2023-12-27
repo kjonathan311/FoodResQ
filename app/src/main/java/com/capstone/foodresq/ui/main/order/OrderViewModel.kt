@@ -7,22 +7,21 @@ import com.capstone.foodresq.data.classes.Order
 import com.capstone.foodresq.data.repository.GetOrderRepository
 import kotlinx.coroutines.launch
 
-class HistoryOrderViewModel(
+class OrderViewModel (
     private val repository: GetOrderRepository
 ): ViewModel() {
-    val allOrderHistory = MutableLiveData<List<Order>?>()
+    val allOrder = MutableLiveData<List<Order>?>()
 
-    fun getAllOrderHistory(){
+    fun getAllOrder(){
         viewModelScope.launch {
             try {
-                val historyOrder = repository.getOrderHistory()
-                allOrderHistory.value = historyOrder
+                val order = repository.getAllOrder()
+                allOrder.value = order
             } catch (e : Exception){
                 e.printStackTrace()
-            }finally {
+            } finally {
 
             }
         }
     }
-
 }

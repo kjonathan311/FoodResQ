@@ -9,9 +9,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.foodresq.data.classes.FoodItem
-import com.capstone.foodresq.data.classes.Selection
 import com.capstone.foodresq.databinding.FragmentExploreBinding
 import com.capstone.foodresq.ui.detail.DetailActivity
 import com.capstone.foodresq.ui.list.ListActivity
@@ -73,7 +70,10 @@ class ExploreFragment : Fragment() {
         exploreViewModel.allFoodsData.observe(viewLifecycleOwner){list->
             if(list!=null){
                 val FoodItemAdapter=FoodItemAdapter(list){
-                    startActivity(Intent(requireActivity(),DetailActivity::class.java).putExtra("id",it.id))
+                    val intent = Intent(requireActivity(), DetailActivity::class.java)
+                    intent.putExtra("id", it.id)
+                    intent.putExtra("restaurant_id", it.restaurant_id)
+                    startActivity(intent)
                 }
                 binding.rvSelections.layoutManager=GridLayoutManager(requireActivity(),2)
                 binding.rvSelections.addItemDecoration(GridSpacingItemDecoration(2,16,false))
@@ -82,6 +82,46 @@ class ExploreFragment : Fragment() {
                 binding.tvSeemoreFoodselection.setOnClickListener {view->
                     val intent = Intent(requireActivity(), ListActivity::class.java)
                     intent.putParcelableArrayListExtra("list",ArrayList(list))//list is list<FoodItem>
+                    startActivity(intent)
+                }
+            }
+        }
+        exploreViewModel.getFoodRecommendation()
+        exploreViewModel.foodRecommendation.observe(viewLifecycleOwner){recommendationList->
+            if (recommendationList!=null){
+                val FoodItemAdapter=FoodItemAdapter(recommendationList){
+                    val intent = Intent(requireActivity(), DetailActivity::class.java)
+                    intent.putExtra("id", it.id)
+                    intent.putExtra("restaurant_id", it.restaurant_id)
+                    startActivity(intent)
+                }
+                binding.rvFoodRecommendation.layoutManager=GridLayoutManager(requireActivity(), 2)
+                binding.rvFoodRecommendation.addItemDecoration(GridSpacingItemDecoration(2, 16, false))
+                binding.rvFoodRecommendation.adapter=FoodItemAdapter
+
+                binding.tvSeemoreRecomendations.setOnClickListener { view ->
+                    val intent = Intent(requireActivity(), ListActivity::class.java)
+                    intent.putParcelableArrayListExtra("list", ArrayList(recommendationList))
+                    startActivity(intent)
+                }
+            }
+        }
+        exploreViewModel.getFoodPopular()
+        exploreViewModel.foodPopular.observe(viewLifecycleOwner){popularList ->
+            if (popularList!=null){
+                val FoodItemAdapter=FoodItemAdapter(popularList){
+                    val intent = Intent(requireActivity(), DetailActivity::class.java)
+                    intent.putExtra("id", it.id)
+                    intent.putExtra("restaurant_id", it.restaurant_id)
+                    startActivity(intent)
+                }
+                binding.rvPopularFoods.layoutManager=GridLayoutManager(requireActivity(), 2)
+                binding.rvPopularFoods.addItemDecoration(GridSpacingItemDecoration(2, 16, false))
+                binding.rvPopularFoods.adapter=FoodItemAdapter
+
+                binding.tvSeemorePopularFoods.setOnClickListener { view ->
+                    val intent = Intent(requireActivity(), ListActivity::class.java)
+                    intent.putParcelableArrayListExtra("list", ArrayList(popularList))
                     startActivity(intent)
                 }
             }

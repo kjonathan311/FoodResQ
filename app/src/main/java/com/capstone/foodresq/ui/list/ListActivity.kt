@@ -22,8 +22,6 @@ class ListActivity : AppCompatActivity() {
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         val foodName=intent.getStringExtra("query")
         val foodList: List<FoodItem>? = intent.getParcelableArrayListExtra("list")
         if(foodName!=null){
@@ -65,7 +63,7 @@ class ListActivity : AppCompatActivity() {
     fun setDataList(foodList:List<FoodItem>){
         showLoading(false)
         val FoodItemAdapter=FoodItemAdapter(foodList){
-            startActivity(Intent(this,DetailActivity::class.java).putExtra("id",it.id))
+            startActivity(Intent(this,DetailActivity::class.java).putExtra("id",it.id).putExtra("restaurant_id", it.restaurant_id))
         }
         binding.rvList.layoutManager=GridLayoutManager(this,2)
         binding.rvList.addItemDecoration(GridSpacingItemDecoration(2,16,false))
