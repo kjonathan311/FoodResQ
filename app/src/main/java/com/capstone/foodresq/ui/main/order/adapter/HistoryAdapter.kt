@@ -34,11 +34,11 @@ class HistoryAdapter(
     }
 
     inner class HistoryViewHolder internal constructor(itemView: View):RecyclerView.ViewHolder(itemView){
-        private val title:TextView=itemView.findViewById(R.id.tv_history_title)
-        private val address:TextView=itemView.findViewById(R.id.tv_history_address)
-        private val pickup:TextView=itemView.findViewById(R.id.tv_history_pickup)
-        private val time:TextView=itemView.findViewById(R.id.tv_history_success)
-        private val btnRate:ImageButton=itemView.findViewById(R.id.btn_rate)
+        val title:TextView=itemView.findViewById(R.id.tv_history_title)
+        val address:TextView=itemView.findViewById(R.id.tv_history_address)
+        val pickup:TextView=itemView.findViewById(R.id.tv_history_pickup)
+        val time:TextView=itemView.findViewById(R.id.tv_history_success)
+        val btnRate:ImageButton=itemView.findViewById(R.id.btn_rate)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_history)
         fun bind(history : Order){
             imageView.setImageResource(R.drawable.exampl_burg)

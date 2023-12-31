@@ -19,7 +19,7 @@ data class Restaurant(
 	val foods: List<FoodItem>,
 
 	@field:SerializedName("latitude")
-	val latitude: Any,
+	val latitude: Double,
 
 	@field:SerializedName("name")
 	val name: String,
@@ -40,5 +40,5 @@ data class Restaurant(
 	val closeTime: String,
 
 	@field:SerializedName("longitude")
-	val longitude: Any
+	val longitude: Double
 )

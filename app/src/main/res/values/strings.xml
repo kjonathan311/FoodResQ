@@ -82,5 +82,8 @@
     <string name="quantityDetail">%1$d x</string>
     <string name="pickup_time">pick-up time : %1$s - %2$s</string>
     <string name="rating_format">%1$s /5</string>
-    <string name="format_total_order">Total %1$d K</string>
+    <string name="format_total_order">Total %1$s</string>
+    <string name="show_direction">Show Direction</string>
+    <string name="liner">pembatas</string>
+    <string name="name">Name</string>
 </resources>

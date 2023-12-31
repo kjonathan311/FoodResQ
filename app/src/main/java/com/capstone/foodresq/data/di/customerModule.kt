@@ -12,7 +12,6 @@ import com.capstone.foodresq.data.repository.GetOrderRepository
 import com.capstone.foodresq.data.repository.HistoryOrderRepository
 import com.capstone.foodresq.data.repository.ListRepository
 import com.capstone.foodresq.data.repository.LoginRepository
-import com.capstone.foodresq.data.repository.MapRepository
 import com.capstone.foodresq.data.repository.OrderDetailRepository
 import com.capstone.foodresq.data.repository.ProfileRepository
 import com.capstone.foodresq.data.repository.RegisterRepository
@@ -48,7 +47,6 @@ val customerModule= module {
     single { HistoryOrderRepository(get()) }
     single { ListRepository(get()) }
     single { LoginRepository(get()) }
-    single { MapRepository(get()) }
     single { OrderDetailRepository(get()) }
     single { ProfileRepository(get()) }
     single { RegisterRepository(get()) }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="210dp"
-    android:layout_height="wrap_content"
+    android:layout_height="190dp"
     android:layout_margin="10dp"
     android:background="@drawable/rounded_food_item"
     android:orientation="vertical"
@@ -15,10 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:scaleType="centerCrop"
-
         app:shapeAppearanceOverlay="@style/rounded_corner_food_image_overlay"
-
-        tools:srcCompat="@drawable/food_item_examp"></com.google.android.material.imageview.ShapeableImageView>
+        tools:srcCompat="@drawable/food_item_examp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +34,7 @@
             android:maxLines="1"
             android:text="@string/food_Item_title"
             android:textColor="@color/black"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -62,8 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:paddingLeft="10dp"
-        android:text="Rp 25k"
+        android:text= "@string/price_after_discount"
         android:textColor="@color/color_palette_2"
-        android:textSize="22dp" />
+        android:textSize="22sp" />
 
 </LinearLayout>

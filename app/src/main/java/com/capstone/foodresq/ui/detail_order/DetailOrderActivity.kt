@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodresq.R
 import com.capstone.foodresq.data.classes.FoodItem
 import com.capstone.foodresq.databinding.ActivityDetailOrderBinding
+import com.capstone.foodresq.ui.detail.DetailViewModel
+import com.capstone.foodresq.utils.Utils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailOrderActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityDetailOrderBinding
     private val viewModel : DetailOrderViewModel by viewModel()
+    private val detailViewModel: DetailViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailOrderBinding.inflate(layoutInflater)
@@ -35,17 +38,25 @@ class DetailOrderActivity : AppCompatActivity() {
                             it.description,
                             it.price,
                             it.discount_price,
-                            it.quantity,
+                            list[0].quantity,
                             it.image,
                             it.restaurant_id
                         )
                     )
                     binding.rvFoodOrder.layoutManager = LinearLayoutManager(this)
                     binding.rvFoodOrder.adapter = FoodOrderAdapter
-                    val quantity = list[0].quantity
-                    val total_price = (quantity*(it.discount_price))/1000
-                    binding.tvDetailOrderTotal.text = resources.getString(R.string.format_total_order, total_price)
                 }
+                var totalPrice = 0
+                for(i in list){
+                    detailViewModel.getDetail(i.foodId)
+                    detailViewModel.foodData.observe(this){
+                        val quantity = i.quantity
+                        val price = it!!.discount_price
+                        val itemPriceTotal = quantity*price
+                        totalPrice = totalPrice + itemPriceTotal
+                    }
+                }
+                binding.tvDetailOrderTotal.text = resources.getString(R.string.format_total_order, Utils.formatPrice(totalPrice.toString()))
             }
         }
 
@@ -56,6 +67,7 @@ class DetailOrderActivity : AppCompatActivity() {
                     tvRestaurantName.text = restaurant.name
                     tvRestaurantAddress.text = restaurant.address
                     tvRating.text = resources.getString(R.string.rating_format, restaurant.rating)
+                    imgRestaurant.setImageResource(R.drawable.exampl_burg)
                 }
             }
         }

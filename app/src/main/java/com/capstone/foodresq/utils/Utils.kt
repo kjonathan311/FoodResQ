@@ -56,10 +56,7 @@ object Utils {
     fun formatPrice(amount: String): String {
         try {
             val value = amount.toInt()
-            return when {
-                value >= 1000 -> "Rp${value / 1000}k"
-                else -> "Rp$value"
-            }
+            return "Rp${value / 1000}k"
         } catch (e: NumberFormatException) {
             return amount
         }

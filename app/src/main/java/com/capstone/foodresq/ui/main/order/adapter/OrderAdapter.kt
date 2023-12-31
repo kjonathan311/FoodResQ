@@ -27,6 +27,7 @@ class OrderAdapter(
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val order=orderList.get(position)
+
         holder.bind(order)
     }
 
@@ -35,11 +36,11 @@ class OrderAdapter(
     }
 
     inner class OrderViewHolder internal constructor(itemView: View):RecyclerView.ViewHolder(itemView){
-        private val title:TextView=itemView.findViewById(R.id.tv_order_title)
-        private val address:TextView=itemView.findViewById(R.id.tv_order_address)
-        private val pickup:TextView=itemView.findViewById(R.id.tv_order_pickup)
-        private val time:TextView=itemView.findViewById(R.id.tv_order_time)
-        private val btnBarcode: ImageButton =itemView.findViewById(R.id.btn_barcode)
+        val title:TextView=itemView.findViewById(R.id.tv_order_title)
+        val address:TextView=itemView.findViewById(R.id.tv_order_address)
+        val pickup:TextView=itemView.findViewById(R.id.tv_order_pickup)
+        val time:TextView=itemView.findViewById(R.id.tv_order_time)
+        val btnBarcode: ImageButton =itemView.findViewById(R.id.btn_barcode)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_order)
 
         fun bind(order: Order){

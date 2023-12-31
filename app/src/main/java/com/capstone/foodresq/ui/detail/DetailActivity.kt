@@ -39,6 +39,12 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
         binding.detailLayout.cardRestaurant.setOnClickListener {
+            detailViewModel.getDetailRestaurant(restaurantid!!)
+            detailViewModel.restaurant.observe(this){
+                val intent = Intent(this, MapsActivity::class.java)
+                intent.putExtra("restaurant_id", it?.id)
+                startActivity(intent)
+            }
             startActivity(Intent(this,MapsActivity::class.java))
         }
         orderButtonHandler(foodId!!, restaurantid!!)

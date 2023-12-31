@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodresq.R
 import com.capstone.foodresq.databinding.FragmentHistoryOrderPagerBinding
+import com.capstone.foodresq.ui.detail.DetailViewModel
 import com.capstone.foodresq.ui.detail_order.DetailOrderActivity
 import com.capstone.foodresq.ui.main.order.adapter.HistoryAdapter
 import com.capstone.foodresq.ui.main.order.adapter.OrderAdapter
@@ -26,6 +27,7 @@ class HistoryOrderPagerFragment : Fragment() {
     lateinit var popupWindow:PopupWindow
     private val historyViewModel:HistoryOrderViewModel by viewModel()
     private val orderViewModel:OrderViewModel by viewModel()
+    private val detailViewModel:DetailViewModel by viewModel()
     private var rate=5
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,60 +46,60 @@ class HistoryOrderPagerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val index=arguments?.getInt(PAGER_NUMBER,0)
-
-        /*val exampleOrderList = listOf(
-            Order(1),
-            Order(2),
-            Order(3),
-        )*/
-
-        /*val exampleHistoryList = listOf(
-            History(1),
-            History(2),
-            History(3),
-            History(4),
-        )*/
 
         if (index==1){
             //order
             orderViewModel.getAllOrder()
             orderViewModel.allOrder.observe(viewLifecycleOwner){list ->
                 if (list!=null){
-                    val orderAdapter = OrderAdapter(list, clickListener = {
-                        val popupView: View =
-                            LayoutInflater.from(requireActivity()).inflate(R.layout.qrcode_popup, null)
-                        popupWindow = PopupWindow(
-                            popupView,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            true
-                        )
-                        val barcodeImage: ImageView = popupView.findViewById(R.id.iv_qc)
-                        val generatedBarcode =
-                            Utils.generateQrCode(it.id,250, 250)
-                        if (generatedBarcode != null) {
-                            barcodeImage.setImageBitmap(generatedBarcode)
-                        }
+                    val orderAdapter = OrderAdapter(
+                        list,
+                        clickListener = {
+                            val popupView: View =
+                                LayoutInflater.from(requireActivity()).inflate(R.layout.qrcode_popup, null)
+                            popupWindow = PopupWindow(
+                                popupView,
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                true
+                            )
+                            val barcodeImage: ImageView = popupView.findViewById(R.id.iv_qc)
+                            val generatedBarcode =
+                                Utils.generateQrCode(it.id,250, 250)
+                            if (generatedBarcode != null) {
+                                barcodeImage.setImageBitmap(generatedBarcode)
+                            }
 
-                        val closeButton: Button = popupView.findViewById(R.id.btn_qc_cancel)
-                        closeButton.setOnClickListener {
-                            popupWindow.dismiss()
-                        }
+                            val closeButton: Button = popupView.findViewById(R.id.btn_qc_cancel)
+                            closeButton.setOnClickListener {
+                                popupWindow.dismiss()
+                            }
 
-                        popupWindow.showAtLocation(
-                            requireActivity().findViewById(android.R.id.content),
-                            Gravity.CENTER,
-                            0,
-                            0
-                        )
-                    }, detailOrderClickListener = {
-                        val intent= Intent(requireActivity(),DetailOrderActivity::class.java)
-                        intent.putExtra("restaurantId", it.restaurant_id)
-                        intent.putExtra("order",it.id)
-                        startActivity(intent)
-                    })
+                            popupWindow.showAtLocation(
+                                requireActivity().findViewById(android.R.id.content),
+                                Gravity.CENTER,
+                                0,
+                                0
+                            )
+                        },
+                        detailOrderClickListener = {
+                            val intent= Intent(requireActivity(),DetailOrderActivity::class.java)
+                            intent.putExtra("restaurantId", it.restaurant_id)
+                            intent.putExtra("order",it.id)
+                            startActivity(intent)
+                       }
+                    )
+                    for (i in list){
+                        detailViewModel.getDetailRestaurant(i.restaurant_id)
+                        detailViewModel.restaurant.observe(viewLifecycleOwner){
+                            with(orderAdapter.OrderViewHolder(view)){
+                                title.text = it?.name
+                                address.text = it?.address
+                                pickup.text = resources.getString(R.string.pickup_time, it?.openTime, it?.closeTime)
+                            }
+                        }
+                    }
                     binding.rvOrder.adapter=orderAdapter
                     binding.rvOrder.layoutManager= LinearLayoutManager(requireContext())
                 }
@@ -172,6 +174,16 @@ class HistoryOrderPagerFragment : Fragment() {
                             0,
                             0
                         )
+                    }
+                    for (i in list){
+                        detailViewModel.getDetailRestaurant(i.restaurant_id)
+                        detailViewModel.restaurant.observe(viewLifecycleOwner){
+                            with(historyAdapter.HistoryViewHolder(view)){
+                                title.text = it?.name
+                                address.text = it?.address
+                                pickup.text = resources.getString(R.string.pickup_time, it?.openTime, it?.closeTime)
+                            }
+                        }
                     }
                     binding.rvOrder.adapter=historyAdapter
                     binding.rvOrder.layoutManager= LinearLayoutManager(requireContext())

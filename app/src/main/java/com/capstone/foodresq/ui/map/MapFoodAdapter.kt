@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.capstone.foodresq.R
-import com.capstone.foodresq.data.dummy.Food
+import com.capstone.foodresq.data.classes.FoodItem
 import com.capstone.foodresq.utils.Utils
 import com.google.android.material.imageview.ShapeableImageView
 
 class MapFoodAdapter(
-    private val FoodMapList : List<Food>,
-    private val clickListener : (Food) -> Unit
+    private val FoodMapList : List<FoodItem>,
+    private val clickListener : (FoodItem) -> Unit
 ) : RecyclerView.Adapter<MapFoodAdapter.MapViewHolder>(){
 
     override fun onCreateViewHolder(
@@ -40,12 +40,12 @@ class MapFoodAdapter(
         private val available: TextView =itemView.findViewById(R.id.tv_food_item_available)
         val imageView: ShapeableImageView = itemView.findViewById(R.id.iv_food_item)
 
-        fun bind(item: Food){
+        fun bind(item: FoodItem){
             title.text = item.name
-            price.text = Utils.formatPrice(item.priceAfter.toString())
-            available.text = itemView.context.resources.getString(R.string.txt_available, item.total)
+            price.text = Utils.formatPrice(item.discount_price.toString())
+            available.text = itemView.context.resources.getString(R.string.txt_available, item.quantity)
             Glide.with(itemView.context)
-                .load(item.photo)
+                .load(item.image)
                 .transform(CenterCrop())
                 .into(imageView)
             itemView.setOnClickListener {

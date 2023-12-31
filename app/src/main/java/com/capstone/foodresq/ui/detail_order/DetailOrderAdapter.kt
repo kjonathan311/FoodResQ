@@ -11,6 +11,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.capstone.foodresq.R
 import com.capstone.foodresq.data.classes.FoodItem
 import com.capstone.foodresq.data.remote.response.OrderDetail
+import com.capstone.foodresq.utils.Utils
 
 class DetailOrderAdapter(
     private val foodOrderList: List<OrderDetail>,
@@ -38,6 +39,7 @@ class DetailOrderAdapter(
         private val title: TextView = itemView.findViewById(R.id.tv_detail_order_title)
         private val picture: ImageView = itemView.findViewById(R.id.iv_detail_order)
         private val quantity: TextView = itemView.findViewById(R.id.tv_detail_quantity)
+        val price:TextView = itemView.findViewById(R.id.tv_detail_order_price)
 
         fun bind(item: OrderDetail, foodDetail : FoodItem) {
             Glide.with(itemView)
@@ -46,6 +48,7 @@ class DetailOrderAdapter(
                 .into(picture)
 
             title.text = foodDetail.name
+            price.text = Utils.formatPrice(foodDetail.discount_price.toString())
             quantity.text = itemView.context.getString(R.string.quantityDetail, item.quantity)
         }
     }

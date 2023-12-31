@@ -63,7 +63,10 @@ class ListActivity : AppCompatActivity() {
     fun setDataList(foodList:List<FoodItem>){
         showLoading(false)
         val FoodItemAdapter=FoodItemAdapter(foodList){
-            startActivity(Intent(this,DetailActivity::class.java).putExtra("id",it.id).putExtra("restaurant_id", it.restaurant_id))
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("id", it.id)
+            intent.putExtra("restaurant_id", it.restaurant_id)
+            startActivity(intent)
         }
         binding.rvList.layoutManager=GridLayoutManager(this,2)
         binding.rvList.addItemDecoration(GridSpacingItemDecoration(2,16,false))
